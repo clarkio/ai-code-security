@@ -3,13 +3,22 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { body, validationResult } = require('express-validator');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
-app.use(helmet());
+// app.use(helmet({
+//   contentSecurityPolicy: {
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       connectSrc: ["'self'", "http://localhost:3000"]
+//     }
+//   }
+// }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/secure-notes');

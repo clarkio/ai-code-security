@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Notes App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Authentication Forms -->
+    <div id="auth-forms">
+      <div id="register-form" class="form-container">
+        <h2>Register</h2>
+        <input type="text" id="register-username" placeholder="Username">
+        <input type="password" id="register-password" placeholder="Password">
+        <button onclick="register()">Register</button>
+      </div>
+
+      <div id="login-form" class="form-container">
+        <h2>Login</h2>
+        <input type="text" id="login-username" placeholder="Username">
+        <input type="password" id="login-password" placeholder="Password">
+        <button onclick="login()">Login</button>
+      </div>
+    </div>
+
+    <!-- Notes Section -->
+    <div id="notes-section" style="display:none;">
+      <h2>Your Notes</h2>
+      <button onclick="logout()">Logout</button>
+
+      <div class="note-form">
+        <input type="text" id="note-title" placeholder="Title">
+        <textarea id="note-body" placeholder="Note body"></textarea>
+        <button onclick="createNote()">Create Note</button>
+      </div>
+
+      <ul id="notes-list"></ul>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
