@@ -1,0 +1,18 @@
+// Use these with the Rest Client VS Code extension by Huachao Mao
+
+POST http://localhost:3000/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "yourusername123",
+    "password": "testing123"
+}
+
+GET http://localhost:3000/notes HTTP/1.1
+
+POST http://localhost:3000/notes HTTP/1.1
+content-type: application/json
+
+{
+    "content": "My nwe note yay!"
+}
