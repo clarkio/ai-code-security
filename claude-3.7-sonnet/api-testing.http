@@ -1,0 +1,32 @@
+GET http://localhost:5000/api/notes
+User-Agent: vscode-restclient
+
+---
+
+POST http://localhost:5000/api/auth/register
+User-Agent: vscode-restclient
+content-type: application/json
+
+{
+    "name": "Claude AI",
+    "email": "ca@example.com",
+    "password": "Password123!"
+}
+
+---
+
+GET http://localhost:5000/api/notes
+User-Agent: vscode-restclient
+Authorization: Bearer <token>
+
+---
+
+POST http://localhost:5000/api/notes
+User-Agent: vscode-restclient
+Authorization: Bearer <token>
+content-type: application/json
+
+{
+    "title": "My first note",
+    "content": "This is my first note"
+}
