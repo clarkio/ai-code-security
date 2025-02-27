@@ -1,5 +1,7 @@
-# ai-code-security
+# GitHub Copilot OpenAI GPT-4 - AI Generated Project
 A demo app to use with AI code tools for showing how they can generate vulnerable code
+
+> Note: This code was generated using GitHub Copilot with the model OpenAI GPT-4 around July 2024
 
 ### Set Up
 1. Run `npm install`
