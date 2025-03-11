@@ -1,0 +1,24 @@
+### Test
+GET http://localhost:3000/api/notes
+User-Agent: vscode-restclient
+
+### Register a new user
+POST http://localhost:3000/api/auth/signup
+User-Agent: vscode-restclient
+content-type: application/json
+
+{
+    "name": "Copilot Agent",
+    "email": "ca@example.com",
+    "password": "Password123!",
+    "passwordConfirm": "Password123!"
+}
+
+### Get all notes while authenticated
+GET http://localhost:3000/api/notes
+User-Agent: vscode-restclient
+Authorization: Bearer <token>
+
+### Logout
+GET http://localhost:3000/api/auth/logout
+User-Agent: vscode-restclient
