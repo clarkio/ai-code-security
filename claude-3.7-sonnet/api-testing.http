@@ -1,7 +1,9 @@
+### 
+
 GET http://localhost:5000/api/notes
 User-Agent: vscode-restclient
 
----
+###
 
 POST http://localhost:5000/api/auth/register
 User-Agent: vscode-restclient
@@ -13,13 +15,13 @@ content-type: application/json
     "password": "Password123!"
 }
 
----
+###
 
 GET http://localhost:5000/api/notes
 User-Agent: vscode-restclient
 Authorization: Bearer <token>
 
----
+###
 
 POST http://localhost:5000/api/notes
 User-Agent: vscode-restclient
