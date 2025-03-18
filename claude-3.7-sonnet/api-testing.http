@@ -32,3 +32,15 @@ content-type: application/json
     "title": "My first note",
     "content": "This is my first note"
 }
+
+### Malicious request payload abuses the User Model poorly written regex
+
+POST http://localhost:5001/api/auth/register
+User-Agent: vscode-restclient
+content-type: application/json
+
+{
+    "name": "Claude AI",
+    "email": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "password": "1234
+}
