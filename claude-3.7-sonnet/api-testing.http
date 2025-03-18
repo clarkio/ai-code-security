@@ -35,7 +35,7 @@ content-type: application/json
 
 ### Malicious request payload abuses the User Model poorly written regex
 
-POST http://localhost:5001/api/auth/register
+POST http://localhost:5000/api/auth/register
 User-Agent: vscode-restclient
 content-type: application/json
 
