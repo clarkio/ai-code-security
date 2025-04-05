@@ -7,7 +7,7 @@
 Get a local MongoDB server running with Docker:
 
 ```sh
-docker run --name mongodb -p 27017:27017 -d mongodb/mongodb-community-server:latest
+docker run --rm --name mongodb-sonnet-demo -p 27017:27017 mongodb/mongodb-community-server:latest
 ```
 
 Run the project:
