@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Notes App</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+  <header>
+    <h1><a href="/">Secure Notes</a></h1>
+    <% if (user) { %>
+      <form action="/logout" method="POST" style="display:inline">
+        <button type="submit">Logout (<%= user.username %>)</button>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      </form>
+    <% } %>
+  </header>
+  <main>
+    <h2>Your Notes</h2>
+    <form action="/notes" method="POST" autocomplete="off">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <input type="text" name="title" maxlength="100" required placeholder="Title">
+      <textarea name="content" maxlength="1000" required placeholder="Note content"></textarea>
+      <button type="submit">Add Note</button>
+    </form>
+    <ul class="notes-list">
+      <% if (notes.length === 0) { %>
+        <li>No notes yet.</li>
+      <% } %>
+      <% notes.forEach(note => { %>
+        <li>
+          <form action="/notes/<%= note.id %>/update" method="POST" class="note-form">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="text" name="title" value="<%- note.title %>" maxlength="100" required>
+            <textarea name="content" maxlength="1000" required><%- note.content %></textarea>
+            <button type="submit">Update</button>
+          </form>
+          <form action="/notes/<%= note.id %>/delete" method="POST" class="delete-form">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" onclick="return confirm('Delete this note?')">Delete</button>
+          </form>
+          <small>Last updated: <%= note.updated_at %></small>
+        </li>
+      <% }) %>
+    </ul>
+  </main>
+</body>
+</html>

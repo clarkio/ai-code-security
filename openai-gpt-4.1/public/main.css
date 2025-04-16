@@ -1,0 +1,12 @@
+body { font-family: system-ui, sans-serif; background: #f7f7fa; margin: 0; padding: 0; }
+header { background: #333; color: #fff; padding: 1em; display: flex; justify-content: space-between; align-items: center; }
+header h1 { margin: 0; font-size: 1.5em; }
+header form { display: inline; }
+main { max-width: 600px; margin: 2em auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #0001; }
+.notes-list { list-style: none; padding: 0; }
+.notes-list li { margin-bottom: 1.5em; border-bottom: 1px solid #eee; padding-bottom: 1em; }
+.note-form input[type="text"], .note-form textarea { width: 100%; margin-bottom: 0.5em; }
+.delete-form { display: inline; }
+button { background: #0074d9; color: #fff; border: none; padding: 0.5em 1em; border-radius: 4px; cursor: pointer; }
+button:hover { background: #005fa3; }
+.error { background: #fdd; color: #900; padding: 1em; border-radius: 4px; margin-bottom: 1em; }
