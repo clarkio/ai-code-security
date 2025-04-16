@@ -1,0 +1,29 @@
+{
+  "name": "secure-notes-app",
+  "version": "1.0.0",
+  "description": "A secure, production-ready Node.js notes app.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-sqlite3": "^0.9.0",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.0.0",
+    "express-session": "^1.17.3",
+    "helmet": "^7.0.0",
+    "sqlite3": "^5.1.6",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
