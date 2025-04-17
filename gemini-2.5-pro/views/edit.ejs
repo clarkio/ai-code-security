@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+<h2><%= title %></h2>
+
+<% if (errors && errors.length > 0) { %>
+<div class="alert alert-danger">
+  <strong>Please fix the following errors:</strong>
+  <ul>
+    <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }); %>
+  </ul>
+</div>
+<% } %>
+
+<form action="/notes/<%= note._id %>/update" method="POST">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+  <div class="form-group mb-3">
+    <label for="title">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      name="title"
+      value="<%= note.title %>"
+      required
+      maxlength="100"
+    />
+  </div>
+
+  <div class="form-group mb-3">
+    <label for="content">Content</label>
+    <textarea
+      class="form-control"
+      id="content"
+      name="content"
+      rows="5"
+      required
+      maxlength="5000"
+    >
+<%= note.content %></textarea
+    >
+  </div>
+
+  <button type="submit" class="btn btn-success">Update Note</button>
+  <a href="/" class="btn btn-secondary">Cancel</a>
+</form>
+
+<%- include('partials/footer') %>

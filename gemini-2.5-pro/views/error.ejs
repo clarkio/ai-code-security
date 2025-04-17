@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+
+<div class="alert alert-danger">
+  <h2><%= title %></h2>
+  <p><%= message %></p>
+
+  <%# Only show stack trace in development %> <% if (process.env.NODE_ENV ===
+  'development' && typeof error !== 'undefined' && error.stack) { %>
+  <pre><code><%= error.stack %></code></pre>
+  <% } %>
+</div>
+
+<a href="/" class="btn btn-primary">Go Back Home</a>
+
+<%- include('partials/footer') %>
