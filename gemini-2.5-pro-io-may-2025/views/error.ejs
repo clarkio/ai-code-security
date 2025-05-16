@@ -1,0 +1,8 @@
+<%- include('partials/header', { title: title, user: user, csrfToken: csrfToken, messages: messages }) %>
+<h1><%= title %></h1>
+<p><%= message %></p>
+<% if (typeof errorDetail !== 'undefined' && errorDetail) { %>
+    <pre><code><%= errorDetail %></code></pre>
+<% } %>
+<p><a href="/">Go to Homepage</a></p>
+<%- include('partials/footer') %>

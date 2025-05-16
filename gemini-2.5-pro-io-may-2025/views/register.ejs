@@ -1,0 +1,35 @@
+<%- include('partials/header', { title: title, user: (typeof user !== 'undefined' ? user : null), csrfToken: csrfToken, messages: messages }) %>
+
+<h2><%= title %></h2>
+
+<% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+    <div class="form-errors">
+        <h4>Please correct the following errors:</h4>
+        <ul>
+            <% errors.forEach(function(error) { %>
+                <li><%= error.msg %></li>
+            <% }); %>
+        </ul>
+    </div>
+<% } %>
+
+<form action="/auth/register" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="<%= typeof old !== 'undefined' && old.username ? old.username : '' %>" required minlength="3" maxlength="20" pattern="[a-zA-Z0-9]+" title="Alphanumeric, 3-20 chars">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required minlength="8" autocomplete="new-password">
+        <small>Min 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char.</small>
+    </div>
+    <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8" autocomplete="new-password">
+    </div>
+    <button type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="/auth/login">Login here</a>.</p>
+
+<%- include('partials/footer') %>
