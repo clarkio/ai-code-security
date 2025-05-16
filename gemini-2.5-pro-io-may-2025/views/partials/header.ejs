@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - Secure Notes</title>
+    <!-- Recommended: Link to a proper CSS file or framework -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <h1><a href="/">Secure Notes App</a></h1>
+        <ul>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <li><span>Welcome, <%= user %></span></li>
+                <li><a href="/notes">My Notes</a></li>
+                <li>
+                    <form action="/auth/logout" method="POST" style="display:inline;">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            <% } else { %>
+                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/auth/register">Register</a></li>
+            <% } %>
+        </ul>
+    </nav>
+    <main>
+        <% if (messages.error && messages.error.length > 0) { %>
+            <div class="message error-message">
+                <% messages.error.forEach(function(error) { %>
+                    <p><%- error %></p> <!-- Assuming flash messages are safe or escaped before storing -->
+                <% }); %>
+            </div>
+        <% } %>
+        <% if (messages.success && messages.success.length > 0) { %>
+            <div class="message success-message">
+                <% messages.success.forEach(function(msg) { %>
+                    <p><%- msg %></p>
+                <% }); %>
+            </div>
+        <% } %>
