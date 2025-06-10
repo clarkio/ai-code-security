@@ -24,7 +24,7 @@ exports.register = async (req, res, next) => {
         }
 
         const newUser = await User.createUser(username, email, password);
-        
+
         // Optionally, sign a JWT token and return it directly
         const payload = { user: { id: newUser.id } };
         jwt.sign(
@@ -32,7 +32,10 @@ exports.register = async (req, res, next) => {
             jwtConfig.secret,
             { expiresIn: jwtConfig.expiresIn },
             (err, token) => {
-                if (err) throw err;
+                if (err) {
+                    console.error(err.message);
+                    return res.status(500).send('Server error');
+                }
                 res.status(201).json({ token, message: 'User registered successfully' });
             }
         );
@@ -70,7 +73,10 @@ exports.login = async (req, res, next) => {
             jwtConfig.secret,
             { expiresIn: jwtConfig.expiresIn },
             (err, token) => {
-                if (err) throw err;
+                if (err) {
+                    console.error(err.message);
+                    return res.status(500).send('Server error');
+                }
                 res.json({ token });
             }
         );
