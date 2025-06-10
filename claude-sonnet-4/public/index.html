@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Secure Notes Application" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Secure Notes App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Loading Spinner -->
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+      </div>
+
+      <!-- Auth Forms -->
+      <div id="auth-container" class="auth-container">
+        <div class="auth-card">
+          <div class="auth-header">
+            <h1><i class="fas fa-shield-alt"></i> Secure Notes</h1>
+            <p>Your notes, secured and protected</p>
+          </div>
+
+          <!-- Login Form -->
+          <form id="login-form" class="auth-form">
+            <h2>Sign In</h2>
+            <div class="form-group">
+              <input type="text" id="login-username" required />
+              <label for="login-username">Username</label>
+            </div>
+            <div class="form-group">
+              <input type="password" id="login-password" required />
+              <label for="login-password">Password</label>
+              <button
+                type="button"
+                class="password-toggle"
+                onclick="togglePassword('login-password')"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+            <p class="auth-switch">
+              Don't have an account?
+              <a href="#" onclick="showRegister()">Sign up</a>
+            </p>
+          </form>
+
+          <!-- Register Form -->
+          <form id="register-form" class="auth-form hidden">
+            <h2>Sign Up</h2>
+            <div class="form-group">
+              <input type="text" id="register-username" required />
+              <label for="register-username">Username</label>
+              <small
+                >3-30 characters, letters, numbers, and underscores only</small
+              >
+            </div>
+            <div class="form-group">
+              <input type="email" id="register-email" required />
+              <label for="register-email">Email</label>
+            </div>
+            <div class="form-group">
+              <input type="password" id="register-password" required />
+              <label for="register-password">Password</label>
+              <button
+                type="button"
+                class="password-toggle"
+                onclick="togglePassword('register-password')"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+              <small
+                >Min 8 chars with uppercase, lowercase, number, and special
+                character</small
+              >
+            </div>
+            <div class="password-strength">
+              <div class="strength-bar">
+                <div id="strength-fill"></div>
+              </div>
+              <span id="strength-text">Password strength</span>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </button>
+            <p class="auth-switch">
+              Already have an account?
+              <a href="#" onclick="showLogin()">Sign in</a>
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Main App -->
+      <div id="main-app" class="main-app hidden">
+        <!-- Header -->
+        <header class="app-header">
+          <div class="header-content">
+            <h1><i class="fas fa-sticky-note"></i> My Notes</h1>
+            <div class="header-actions">
+              <span class="user-info">
+                <i class="fas fa-user"></i>
+                <span id="username-display"></span>
+              </span>
+              <button id="logout-btn" class="btn btn-outline">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+          <div class="notes-container">
+            <!-- Notes Header -->
+            <div class="notes-header">
+              <button id="new-note-btn" class="btn btn-primary">
+                <i class="fas fa-plus"></i> New Note
+              </button>
+              <div class="search-box">
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search notes..."
+                />
+                <i class="fas fa-search"></i>
+              </div>
+            </div>
+
+            <!-- Notes List -->
+            <div id="notes-list" class="notes-list">
+              <div class="empty-state">
+                <i class="fas fa-sticky-note"></i>
+                <h3>No notes yet</h3>
+                <p>Create your first note to get started</p>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Note Modal -->
+      <div id="note-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="modal-title">New Note</h2>
+            <button class="modal-close" onclick="closeModal()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form id="note-form" class="note-form">
+            <div class="form-group">
+              <input type="text" id="note-title" required maxlength="200" />
+              <label for="note-title">Title</label>
+            </div>
+            <div class="form-group">
+              <textarea
+                id="note-content"
+                required
+                maxlength="10000"
+                rows="10"
+              ></textarea>
+              <label for="note-content">Content</label>
+            </div>
+            <div class="modal-actions">
+              <button
+                type="button"
+                class="btn btn-outline"
+                onclick="closeModal()"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Note
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Delete Confirmation Modal -->
+      <div id="delete-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Delete Note</h2>
+            <button class="modal-close" onclick="closeDeleteModal()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Are you sure you want to delete this note? This action cannot be
+              undone.
+            </p>
+          </div>
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="btn btn-outline"
+              onclick="closeDeleteModal()"
+            >
+              Cancel
+            </button>
+            <button id="confirm-delete-btn" class="btn btn-danger">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast Notifications -->
+      <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
