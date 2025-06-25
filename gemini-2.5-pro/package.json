@@ -24,7 +24,7 @@
     "express-session": "^1.18.1",
     "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
-    "mongoose": "^8.13.2",
+    "mongoose": "^8.15.1",
     "morgan": "^1.10.0",
     "rate-limiter-flexible": "^7.0.0"
   },
