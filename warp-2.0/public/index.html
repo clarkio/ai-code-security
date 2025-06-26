@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <title>Secure Notes App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .auth-section, .notes-section {
+            margin-bottom: 30px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .note-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .note-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .note-content {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .note-meta {
+            font-size: 0.9em;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        
+        .note-actions {
+            text-align: right;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .user-info {
+            text-align: right;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .security-info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .security-info h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+        
+        .security-features {
+            list-style: none;
+            color: #0c5460;
+        }
+        
+        .security-features li:before {
+            content: "🛡️ ";
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Secure Notes App</h1>
+        
+        <div class="security-info">
+            <h3>Security Features Enabled</h3>
+            <ul class="security-features">
+                <li>End-to-end input validation & sanitization</li>
+                <li>JWT-based authentication with token blacklisting</li>
+                <li>bcrypt password hashing (12 rounds)</li>
+                <li>SQL injection prevention via parameterized queries</li>
+                <li>XSS protection with content sanitization</li>
+                <li>Rate limiting on authentication endpoints</li>
+                <li>CORS protection and security headers</li>
+                <li>Account lockout after failed attempts</li>
+            </ul>
+        </div>
+        
+        <div id="error-message" class="error hidden"></div>
+        <div id="success-message" class="success hidden"></div>
+        
+        <!-- Authentication Section -->
+        <div id="auth-section" class="auth-section">
+            <div id="login-form">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="login-username">Username or Email:</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button onclick="login()">Login</button>
+                <button onclick="showRegister()">Register Instead</button>
+            </div>
+            
+            <div id="register-form" class="hidden">
+                <h2>Register</h2>
+                <div class="form-group">
+                    <label for="register-username">Username (3-50 chars, alphanumeric + _ -):</label>
+                    <input type="text" id="register-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password (8+ chars, must include: A-Z, a-z, 0-9, special chars):</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <button onclick="register()">Register</button>
+                <button onclick="showLogin()">Login Instead</button>
+            </div>
+        </div>
+        
+        <!-- Notes Section -->
+        <div id="notes-section" class="notes-section hidden">
+            <div class="user-info">
+                <span id="user-welcome">Welcome, <span id="username"></span>!</span>
+                <button onclick="logout()">Logout</button>
+            </div>
+            
+            <div id="note-form">
+                <h2 id="form-title">Create New Note</h2>
+                <div class="form-group">
+                    <label for="note-title">Title (1-200 chars):</label>
+                    <input type="text" id="note-title" required maxlength="200">
+                </div>
+                <div class="form-group">
+                    <label for="note-content">Content (1-10,000 chars):</label>
+                    <textarea id="note-content" required maxlength="10000"></textarea>
+                </div>
+                <button onclick="saveNote()">Save Note</button>
+                <button id="cancel-edit" onclick="cancelEdit()" class="hidden">Cancel Edit</button>
+            </div>
+            
+            <div id="notes-list">
+                <h2>Your Notes</h2>
+                <div id="notes-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let authToken = localStorage.getItem('authToken');
+        let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        let editingNoteId = null;
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            if (authToken && currentUser) {
+                showNotesSection();
+                loadNotes();
+            } else {
+                showAuthSection();
+            }
+        });
+        
+        // Utility functions
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.classList.remove('hidden');
+            setTimeout(() => errorDiv.classList.add('hidden'), 5000);
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = message;
+            successDiv.classList.remove('hidden');
+            setTimeout(() => successDiv.classList.add('hidden'), 3000);
+        }
+        
+        function showAuthSection() {
+            document.getElementById('auth-section').classList.remove('hidden');
+            document.getElementById('notes-section').classList.add('hidden');
+        }
+        
+        function showNotesSection() {
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('notes-section').classList.remove('hidden');
+            document.getElementById('username').textContent = currentUser.username;
+        }
+        
+        function showLogin() {
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('register-form').classList.add('hidden');
+        }
+        
+        function showRegister() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.remove('hidden');
+        }
+        
+        // API functions
+        async function apiCall(endpoint, method = 'GET', data = null) {
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            
+            if (authToken) {
+                headers['Authorization'] = `Bearer ${authToken}`;
+            }
+            
+            const config = {
+                method: method,
+                headers: headers
+            };
+            
+            if (data) {
+                config.body = JSON.stringify(data);
+            }
+            
+            try {
+                const response = await fetch(`/api${endpoint}`, config);
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(result.error || 'Request failed');
+                }
+                
+                return result;
+            } catch (error) {
+                throw error;
+            }
+        }
+        
+        // Authentication functions
+        async function register() {
+            const username = document.getElementById('register-username').value.trim();
+            const email = document.getElementById('register-email').value.trim();
+            const password = document.getElementById('register-password').value;
+            
+            if (!username || !email || !password) {
+                showError('All fields are required');
+                return;
+            }
+            
+            try {
+                await apiCall('/auth/register', 'POST', { username, email, password });
+                showSuccess('Registration successful! Please login.');
+                showLogin();
+                // Clear form
+                document.getElementById('register-username').value = '';
+                document.getElementById('register-email').value = '';
+                document.getElementById('register-password').value = '';
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+        
+        async function login() {
+            const usernameOrEmail = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
+            
+            if (!usernameOrEmail || !password) {
+                showError('Username/email and password are required');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/auth/login', 'POST', { usernameOrEmail, password });
+                authToken = result.token;
+                currentUser = result.user;
+                
+                localStorage.setItem('authToken', authToken);
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                showSuccess('Login successful!');
+                showNotesSection();
+                loadNotes();
+                
+                // Clear form
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+        
+        async function logout() {
+            try {
+                await apiCall('/auth/logout', 'POST');
+            } catch (error) {
+                console.error('Logout error:', error);
+            } finally {
+                authToken = null;
+                currentUser = null;
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('currentUser');
+                showAuthSection();
+                clearNotesForm();
+            }
+        }
+        
+        // Notes functions
+        async function loadNotes() {
+            try {
+                const result = await apiCall('/notes');
+                displayNotes(result.notes);
+            } catch (error) {
+                showError('Failed to load notes: ' + error.message);
+            }
+        }
+        
+        function displayNotes(notes) {
+            const container = document.getElementById('notes-container');
+            
+            if (notes.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">No notes yet. Create your first note above!</p>';
+                return;
+            }
+            
+            container.innerHTML = notes.map(note => `
+                <div class="note-item">
+                    <div class="note-title">${escapeHtml(note.title)}</div>
+                    <div class="note-content">${escapeHtml(note.content)}</div>
+                    <div class="note-meta">
+                        Created: ${new Date(note.created_at).toLocaleDateString()}
+                        ${note.updated_at !== note.created_at ? ` | Updated: ${new Date(note.updated_at).toLocaleDateString()}` : ''}
+                    </div>
+                    <div class="note-actions">
+                        <button onclick="editNote(${note.id})">Edit</button>
+                        <button onclick="deleteNote(${note.id})" style="background: #dc3545;">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        async function saveNote() {
+            const title = document.getElementById('note-title').value.trim();
+            const content = document.getElementById('note-content').value.trim();
+            
+            if (!title || !content) {
+                showError('Title and content are required');
+                return;
+            }
+            
+            if (title.length > 200) {
+                showError('Title must be 200 characters or less');
+                return;
+            }
+            
+            if (content.length > 10000) {
+                showError('Content must be 10,000 characters or less');
+                return;
+            }
+            
+            try {
+                if (editingNoteId) {
+                    // Update existing note
+                    await apiCall(`/notes/${editingNoteId}`, 'PUT', { title, content });
+                    showSuccess('Note updated successfully!');
+                    cancelEdit();
+                } else {
+                    // Create new note
+                    await apiCall('/notes', 'POST', { title, content });
+                    showSuccess('Note created successfully!');
+                }
+                
+                clearNotesForm();
+                loadNotes();
+            } catch (error) {
+                showError('Failed to save note: ' + error.message);
+            }
+        }
+        
+        async function editNote(noteId) {
+            try {
+                const result = await apiCall(`/notes/${noteId}`);
+                const note = result.note;
+                
+                document.getElementById('note-title').value = note.title;
+                document.getElementById('note-content').value = note.content;
+                document.getElementById('form-title').textContent = 'Edit Note';
+                document.getElementById('cancel-edit').classList.remove('hidden');
+                
+                editingNoteId = noteId;
+                
+                // Scroll to form
+                document.getElementById('note-form').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                showError('Failed to load note for editing: ' + error.message);
+            }
+        }
+        
+        function cancelEdit() {
+            editingNoteId = null;
+            document.getElementById('form-title').textContent = 'Create New Note';
+            document.getElementById('cancel-edit').classList.add('hidden');
+            clearNotesForm();
+        }
+        
+        async function deleteNote(noteId) {
+            if (!confirm('Are you sure you want to delete this note? This action cannot be undone.')) {
+                return;
+            }
+            
+            try {
+                await apiCall(`/notes/${noteId}`, 'DELETE');
+                showSuccess('Note deleted successfully!');
+                loadNotes();
+            } catch (error) {
+                showError('Failed to delete note: ' + error.message);
+            }
+        }
+        
+        function clearNotesForm() {
+            document.getElementById('note-title').value = '';
+            document.getElementById('note-content').value = '';
+        }
+        
+        // Utility function to escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Handle Enter key for forms
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const activeForm = document.querySelector('#auth-section > div:not(.hidden)');
+                if (activeForm) {
+                    if (activeForm.id === 'login-form') {
+                        login();
+                    } else if (activeForm.id === 'register-form') {
+                        register();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
