@@ -2,3 +2,6 @@
 /**/node_modules
 *.sqlite
 sessions
+.env
+/**/.env
+/**/.dcignore

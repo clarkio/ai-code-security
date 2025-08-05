@@ -1,0 +1,30 @@
+{
+  "name": "secure-notes-app",
+  "version": "1.0.0",
+  "description": "Secure notes application with authentication",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.2.0",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-validator": "^7.0.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.2",
+    "dotenv": "^16.4.5",
+    "cors": "^2.8.5",
+    "hpp": "^0.2.3",
+    "xss": "^1.0.15",
+    "express-session": "^1.18.0",
+    "connect-mongo": "^5.1.0",
+    "csurf": "^1.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Notes</title>
+</head>
+<body>
+    <header>
+        <h1>Your Notes</h1>
+        <a href="/logout">Logout</a>
+    </header>
+    <main>
+        <form id="noteForm" action="/notes" method="POST">
+            <input type="text" name="title" placeholder="Note Title" required>
+            <textarea name="content" placeholder="Note Content" required></textarea>
+            <button type="submit">Add Note</button>
+        </form>
+        <section id="notesList">
+            <% if (notes.length > 0) { %>
+                <ul>
+                    <% notes.forEach(note => { %>
+                        <li>
+                            <h2><%= note.title %></h2>
+                            <p><%= note.content %></p>
+                            <form action="/notes/<%= note.id %>?_method=DELETE" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                            <a href="/notes/<%= note.id %>/edit">Edit</a>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>No notes available. Start by adding a note!</p>
+            <% } %>
+        </section>
+    </main>
+    <script src="/js/client.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "secure-notes-app",
+  "version": "1.0.0",
+  "description": "A secure notes application that allows users to create, update, and delete notes.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9",
+    "dotenv": "^8.2.0",
+    "helmet": "^4.4.1",
+    "express-rate-limit": "^5.2.6",
+    "express-validator": "^6.6.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.0",
+    "supertest": "^6.1.0"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "license": "MIT"
+}
