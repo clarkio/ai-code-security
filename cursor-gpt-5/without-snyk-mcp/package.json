@@ -1,0 +1,41 @@
+{
+  "name": "secure-notes-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-ready, secure Node.js notes app (Express + SQLite + CSRF + sessions)",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --legacy-watch src/server.js",
+    "start": "node src/server.js",
+    "build": "echo 'No build step for JS'",
+    "lint": "echo 'No linter configured'",
+    "audit": "npm audit --audit-level=high || exit 0"
+  },
+  "engines": {
+    "node": ">=18.18.0",
+    "npm": ">=9"
+  },
+  "dependencies": {
+    "argon2": "^0.40.3",
+    "better-sqlite3": "^9.6.0",
+    "compression": "^1.7.4",
+    "connect-sqlite3": "^0.9.15",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express-ejs-layouts": "^2.5.1",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
+
+

@@ -1,0 +1,16 @@
+<div class="notes-header">
+  <h1>My Notes</h1>
+  <a class="btn" href="/notes/new">New note</a>
+</div>
+<% if (!notes || notes.length === 0) { %>
+<p>No notes yet.</p>
+<% } else { %>
+<ul class="notes-list">
+  <% notes.forEach(n => { %>
+  <li>
+    <a href="/notes/<%= n.id %>"><strong><%= n.title %></strong></a>
+    <span class="muted">Updated <%= n.updated_at %></span>
+  </li>
+  <% }) %>
+</ul>
+<% } %>

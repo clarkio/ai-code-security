@@ -1,0 +1,7 @@
+<h1>Confirm deletion</h1>
+<p>Are you sure you want to delete: <strong><%= title %></strong>?</p>
+<form method="post" action="<%= action %>">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+  <button class="btn danger" type="submit">Yes, delete</button>
+  <a class="btn" href="<%= cancelHref %>">Cancel</a>
+</form>

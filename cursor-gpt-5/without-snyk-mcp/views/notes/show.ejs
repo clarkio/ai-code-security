@@ -1,0 +1,12 @@
+<div class="note-show">
+  <h1><%= note.title %></h1>
+  <pre class="note-body"><%= note.body %></pre>
+  <div class="actions">
+    <a class="btn" href="/notes/<%= note.id %>/edit">Edit</a>
+    <a class="btn danger" href="/notes/<%= note.id %>/delete">Delete</a>
+  </div>
+  <p class="muted small">
+    Created <%= note.created_at %> • Updated <%= note.updated_at %>
+  </p>
+  <p><a href="/notes">Back</a></p>
+</div>

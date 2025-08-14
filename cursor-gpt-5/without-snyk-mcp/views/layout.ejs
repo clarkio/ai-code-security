@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Secure Notes</title>
+    <link rel="stylesheet" href="/public/styles.css" />
+  </head>
+  <body>
+    <header class="container">
+      <nav class="nav">
+        <a href="/" class="brand">Secure Notes</a>
+        <div class="nav-right">
+          <% if (isAuthenticated) { %>
+          <a href="/notes">My Notes</a>
+          <form action="/auth/logout" method="post" style="display: inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button type="submit" class="link">Log out</button>
+          </form>
+          <% } else { %>
+          <a href="/auth/login">Log in</a>
+          <a href="/auth/register" class="btn">Register</a>
+          <% } %>
+        </div>
+      </nav>
+    </header>
+    <main class="container"><%- body %></main>
+    <footer class="container small text-muted">
+      <p>&copy; <%= new Date().getFullYear() %> Secure Notes</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<h1>Log in</h1>
+<% if (typeof error !== 'undefined') { %>
+<p class="error"><%= error %></p>
+<% } %>
+<form method="post" action="/auth/login" autocomplete="off">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+  <div class="field">
+    <label for="username">Username</label>
+    <input
+      id="username"
+      name="username"
+      required
+      minlength="3"
+      maxlength="30"
+      pattern="[A-Za-z0-9_]+"
+    />
+  </div>
+  <div class="field">
+    <label for="password">Password</label>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      required
+      minlength="12"
+      maxlength="200"
+    />
+  </div>
+  <button class="btn" type="submit">Log in</button>
+</form>

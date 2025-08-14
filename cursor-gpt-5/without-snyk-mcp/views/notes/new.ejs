@@ -1,0 +1,16 @@
+<h1>New note</h1>
+<% if (typeof error !== 'undefined') { %>
+<p class="error"><%= error %></p>
+<% } %>
+<form method="post" action="/notes" autocomplete="off">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+  <div class="field">
+    <label for="title">Title</label>
+    <input id="title" name="title" required maxlength="200" />
+  </div>
+  <div class="field">
+    <label for="body">Body</label>
+    <textarea id="body" name="body" maxlength="5000" rows="10"></textarea>
+  </div>
+  <button class="btn" type="submit">Create</button>
+</form>
