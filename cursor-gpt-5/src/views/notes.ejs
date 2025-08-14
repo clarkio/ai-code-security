@@ -1,0 +1,56 @@
+<h2>Your notes</h2>
+
+<section>
+  <h3>Create note</h3>
+  <form method="post" action="/notes">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label
+      >Title
+      <input name="title" type="text" required maxlength="200" />
+    </label>
+    <label
+      >Content
+      <textarea name="content" rows="5" required maxlength="5000"></textarea>
+    </label>
+    <button class="btn" type="submit">Add note</button>
+  </form>
+</section>
+
+<section>
+  <h3>Existing notes</h3>
+  <% if (!notes || notes.length === 0) { %>
+  <p class="muted">No notes yet.</p>
+  <% } %>
+  <ul class="notes">
+    <% (notes || []).forEach(n => { %>
+    <li>
+      <form method="post" action="/notes/<%= n.id %>">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <input
+          type="text"
+          name="title"
+          value="<%= n.title %>"
+          maxlength="200"
+          required
+        />
+        <textarea name="content" rows="3" maxlength="5000" required>
+<%= n.content %></textarea
+        >
+        <div class="row">
+          <button class="btn" type="submit">Save</button>
+        </div>
+      </form>
+      <form method="post" action="/notes/<%= n.id %>/delete">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button
+          class="btn danger"
+          type="submit"
+          aria-label="Delete note <%= n.title %>"
+        >
+          Delete
+        </button>
+      </form>
+    </li>
+    <% }) %>
+  </ul>
+</section>
