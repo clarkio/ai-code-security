@@ -1,0 +1,13 @@
+---
+description: Run Snyk code scan after each code change.
+globs: ["src/**/*.js", "src/**/*.ts", "lib/**/*.js", "lib/**/*.ts"]
+alwaysApply: false
+---
+
+# Snyk Code Scan Rule
+
+Whenever you make a code change:
+
+- Run `snyk code test` (CLI) or `snyk_code_scan` (MCP) to detect vulnerabilities.
+- Follow the remediation recommendations.
+- Repeat scans after each edit to catch new issues immediately.
