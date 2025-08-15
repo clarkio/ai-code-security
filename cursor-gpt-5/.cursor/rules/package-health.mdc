@@ -1,0 +1,15 @@
+---
+description: Ensure npm packages are healthy before recommending or installing.
+globs: ["package.json"]
+alwaysApply: false
+---
+
+# Package Health Check Rule
+
+When recommending or installing npm packages:
+
+- Confirm the package is healthy and well-maintained.
+- Use a tool to fetch its Snyk Advisor page:  
+  Format: `https://snyk.io/advisor/npm-package/<package-name>`
+- Validate the package has no major security or maintenance red flags before using.
+- The Package Health Score must be above or equal to 70 for the package. If it's not then you must not suggest this package. Instead you should look for an alternative package for the same purpose that fulfills the requirment of having a package health score on Snyk Advisor that is equal to or greater than 70.
