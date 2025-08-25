@@ -1,0 +1,42 @@
+---
+description: Enforce security scanning on all code and dependencies.
+alwaysApply: true
+globs: ["**"]
+---
+
+# Security Scanning Guidelines
+
+## Mission
+
+- Always identify and address security vulnerabilities in the codebase and third-party dependencies.
+- Never suggest an unmaintained, non-existent, or malicious package.
+- Run code security scans, dependency security scans, review dependency health, analyze results, and apply fixes.
+
+## Package Health Review
+
+When suggesting an npm package:
+
+1. Ensure the package is healthy and well-maintained.
+2. Use a tool to fetch a webpage (e.g., `fetch`, Playwright browser navigation, `curl`, or `wget`).
+3. Visit the Snyk Advisor for the package:  
+   `https://snyk.io/advisor/npm-package/<package-name>`  
+   Example: `https://snyk.io/advisor/npm-package/express`
+4. Verify package health before recommending installation.
+
+## Third-Party Dependency Scanning (SCA)
+
+When installing or updating dependencies:
+
+- **Always** use Snyk for scanning, never `npm audit`.
+- Use one of:
+  - **Snyk MCP Server** → invoke `snyk_sca_scan` with the absolute project path, then follow fix recommendations.
+  - **Snyk CLI** → run `snyk test` and follow CLI fix recommendations.
+
+## Code Security Scanning (SAST)
+
+When making code changes:
+
+- **Always** run Snyk code scans after edits.
+- Use one of:
+  - **Snyk MCP Server** → invoke `snyk_code_scan` with the absolute project path, then follow fix recommendations.
+  - **Snyk CLI** → run `snyk code test` and follow CLI fix recommendations.

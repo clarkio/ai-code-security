@@ -1,0 +1,15 @@
+---
+description: Scan and fix vulnerabilities in dependencies using Snyk.
+globs: ["package.json", "package-lock.json"]
+alwaysApply: false
+---
+
+# Snyk Dependency Scan Rule
+
+When adding or updating dependencies:
+
+- Never use `npm audit`.
+- Use:
+  - **Snyk MCP Server**: `snyk_sca_scan` with project path.
+  - **Snyk CLI**: `snyk test`.
+- Fix vulnerabilities according to Snyk's recommendations.
