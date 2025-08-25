@@ -1,0 +1,37 @@
+{
+  "name": "secure-notes-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A production-ready, secure Node.js notes app with authentication, CSRF, and hardened defaults.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon --watch src --ext js,ejs,css src/server.js",
+    "build": "echo 'No build step needed'",
+    "postinstall": "node -e \"require('fs').mkdirSync('data',{recursive:true})\""
+  },
+  "dependencies": {
+    "argon2": "^0.40.1",
+    "compression": "^1.7.4",
+    "connect-sqlite3": "^0.9.15",
+    "express-ejs-layouts": "^2.5.1",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0",
+    "pino": "^9.3.2",
+    "pino-http": "^10.3.0",
+    "better-sqlite3": "^9.6.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

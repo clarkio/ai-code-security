@@ -1,0 +1,16 @@
+<h2>Login</h2>
+<% if (typeof error !== 'undefined' && error) { %>
+<div class="alert"><%= error %></div>
+<% } %>
+<form method="post" action="/login" autocomplete="off">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+  <label
+    >Email
+    <input name="email" type="email" required maxlength="254" />
+  </label>
+  <label
+    >Password
+    <input name="password" type="password" required maxlength="128" />
+  </label>
+  <button class="btn" type="submit">Login</button>
+</form>

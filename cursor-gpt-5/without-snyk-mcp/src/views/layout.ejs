@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title || 'Secure Notes' %></title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="container">
+      <h1>Secure Notes</h1>
+      <nav>
+        <% if (user) { %>
+        <form method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button class="btn" type="submit">Logout</button>
+        </form>
+        <% } else { %>
+        <a class="btn" href="/login">Login</a>
+        <a class="btn" href="/register">Register</a>
+        <% } %>
+      </nav>
+    </header>
+    <main class="container"><%- body %></main>
+    <footer class="container muted">
+      <p>&copy; <%= new Date().getFullYear() %> Secure Notes</p>
+    </footer>
+  </body>
+</html>
