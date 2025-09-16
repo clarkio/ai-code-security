@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Secure Notes App</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https:; connect-src 'self'; font-src 'self'; object-src 'none'; media-src 'self'; frame-src 'none';">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><a href="/">Secure Notes</a></h1>
+            <nav class="nav">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/login" class="nav-link active">Login</a>
+                <a href="/register" class="nav-link">Register</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="auth-container">
+                <div class="auth-form">
+                    <h2>Sign In</h2>
+                    
+                    <!-- Rate limiting warning -->
+                    <div id="rate-limit-warning" class="alert alert-warning" style="display: none;">
+                        <p>Too many login attempts. Please wait before trying again.</p>
+                        <p>Remaining time: <span id="rate-limit-countdown"></span></p>
+                    </div>
+
+                    <!-- Error messages -->
+                    <div id="error-message" class="alert alert-error" style="display: none;"></div>
+
+                    <!-- Success messages -->
+                    <div id="success-message" class="alert alert-success" style="display: none;"></div>
+
+                    <form id="login-form" class="form">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                required 
+                                autocomplete="email"
+                                maxlength="254"
+                                aria-describedby="email-error"
+                            >
+                            <div id="email-error" class="field-error" style="display: none;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input" 
+                                required 
+                                autocomplete="current-password"
+                                minlength="12"
+                                maxlength="128"
+                                aria-describedby="password-error"
+                            >
+                            <div id="password-error" class="field-error" style="display: none;"></div>
+                        </div>
+
+                        <!-- CSRF Token (will be populated by JavaScript) -->
+                        <input type="hidden" id="csrf-token" name="_csrf" value="">
+
+                        <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+                            <span class="btn-text">Sign In</span>
+                            <span class="btn-spinner" style="display: none;">Signing in...</span>
+                        </button>
+                    </form>
+
+                    <div class="auth-links">
+                        <p>Don't have an account? <a href="/register">Create one here</a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Secure Notes App. Built with security in mind.</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Secure Notes App</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https:; connect-src 'self'; font-src 'self'; object-src 'none'; media-src 'self'; frame-src 'none';">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><a href="/">Secure Notes</a></h1>
+            <nav class="nav">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/login" class="nav-link">Login</a>
+                <a href="/register" class="nav-link active">Register</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="auth-container">
+                <div class="auth-form">
+                    <h2>Create Account</h2>
+                    
+                    <!-- Error messages -->
+                    <div id="error-message" class="alert alert-error" style="display: none;"></div>
+
+                    <!-- Success messages -->
+                    <div id="success-message" class="alert alert-success" style="display: none;"></div>
+
+                    <form id="register-form" class="form">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                required 
+                                autocomplete="email"
+                                maxlength="254"
+                                aria-describedby="email-error email-help"
+                            >
+                            <div id="email-help" class="field-help">We'll never share your email with anyone else.</div>
+                            <div id="email-error" class="field-error" style="display: none;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input" 
+                                required 
+                                autocomplete="new-password"
+                                minlength="12"
+                                maxlength="128"
+                                aria-describedby="password-error password-help password-strength"
+                            >
+                            <div id="password-help" class="field-help">
+                                Password must be at least 12 characters and include:
+                                <ul>
+                                    <li id="req-length">At least 12 characters</li>
+                                    <li id="req-uppercase">One uppercase letter</li>
+                                    <li id="req-lowercase">One lowercase letter</li>
+                                    <li id="req-number">One number</li>
+                                    <li id="req-special">One special character</li>
+                                </ul>
+                            </div>
+                            <div id="password-strength" class="password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="strength-fill"></div>
+                                </div>
+                                <div class="strength-text" id="strength-text">Password strength: Weak</div>
+                            </div>
+                            <div id="password-error" class="field-error" style="display: none;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                class="form-input" 
+                                required 
+                                autocomplete="new-password"
+                                minlength="12"
+                                maxlength="128"
+                                aria-describedby="confirm-password-error"
+                            >
+                            <div id="confirm-password-error" class="field-error" style="display: none;"></div>
+                        </div>
+
+                        <!-- CSRF Token (will be populated by JavaScript) -->
+                        <input type="hidden" id="csrf-token" name="_csrf" value="">
+
+                        <button type="submit" class="btn btn-primary btn-full" id="register-btn" disabled>
+                            <span class="btn-text">Create Account</span>
+                            <span class="btn-spinner" style="display: none;">Creating account...</span>
+                        </button>
+                    </form>
+
+                    <div class="auth-links">
+                        <p>Already have an account? <a href="/login">Sign in here</a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Secure Notes App. Built with security in mind.</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/register.js"></script>
+</body>
+</html>

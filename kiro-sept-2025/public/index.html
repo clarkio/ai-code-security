@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Notes App</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https:; connect-src 'self'; font-src 'self'; object-src 'none'; media-src 'self'; frame-src 'none';">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Secure Notes</h1>
+            <nav class="nav">
+                <a href="/" class="nav-link active">Home</a>
+                <a href="/login" class="nav-link">Login</a>
+                <a href="/register" class="nav-link">Register</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="hero">
+                <h2>Welcome to Secure Notes</h2>
+                <p>Your personal notes, secured with industry-standard encryption and security practices.</p>
+                <div class="cta-buttons">
+                    <a href="/register" class="btn btn-primary">Get Started</a>
+                    <a href="/login" class="btn btn-secondary">Sign In</a>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <h3>🔒 End-to-End Encryption</h3>
+                    <p>Your notes are encrypted with AES-256 encryption before being stored.</p>
+                </div>
+                <div class="feature">
+                    <h3>🛡️ Security First</h3>
+                    <p>Built with security best practices to protect against common vulnerabilities.</p>
+                </div>
+                <div class="feature">
+                    <h3>🔐 Secure Authentication</h3>
+                    <p>Strong password requirements and secure session management.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Secure Notes App. Built with security in mind.</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

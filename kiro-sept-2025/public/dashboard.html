@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Secure Notes App</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https:; connect-src 'self'; font-src 'self'; object-src 'none'; media-src 'self'; frame-src 'none';">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><a href="/dashboard">Secure Notes</a></h1>
+            <nav class="nav">
+                <a href="/dashboard" class="nav-link active">Dashboard</a>
+                <a href="/notes" class="nav-link">My Notes</a>
+                <a href="#" class="nav-link" id="logout-link">Logout</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h2>Welcome to Your Secure Notes</h2>
+                    <p>Manage your encrypted notes with confidence.</p>
+                </div>
+
+                <!-- Error and success messages -->
+                <div id="error-message" class="alert alert-error" style="display: none;"></div>
+                <div id="success-message" class="alert alert-success" style="display: none;"></div>
+
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <h3 id="total-notes">0</h3>
+                        <p>Total Notes</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="recent-notes">0</h3>
+                        <p>Recent Notes</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="last-login">Never</h3>
+                        <p>Last Login</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-actions">
+                    <a href="/notes/new" class="btn btn-primary">Create New Note</a>
+                    <a href="/notes" class="btn btn-secondary">View All Notes</a>
+                </div>
+
+                <div class="recent-notes-section">
+                    <h3>Recent Notes</h3>
+                    <div id="recent-notes-list" class="notes-list">
+                        <div class="loading-spinner" id="loading-spinner">Loading your notes...</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Secure Notes App. Built with security in mind.</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
