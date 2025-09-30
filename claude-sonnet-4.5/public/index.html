@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;"
+    />
+    <title>Secure Notes App</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Auth Forms -->
+      <div id="auth-container" class="container">
+        <div class="card">
+          <h1>🔒 Secure Notes</h1>
+
+          <!-- Login Form -->
+          <div id="login-form" class="form-container">
+            <h2>Login</h2>
+            <form id="loginForm">
+              <div class="form-group">
+                <label for="login-username">Username</label>
+                <input
+                  type="text"
+                  id="login-username"
+                  name="username"
+                  required
+                  pattern="[a-zA-Z0-9_-]+"
+                  minlength="3"
+                  maxlength="30"
+                  autocomplete="username"
+                />
+              </div>
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input
+                  type="password"
+                  id="login-password"
+                  name="password"
+                  required
+                  minlength="8"
+                  maxlength="128"
+                  autocomplete="current-password"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+              <p class="form-switch">
+                Don't have an account?
+                <a href="#" id="show-register">Register</a>
+              </p>
+            </form>
+          </div>
+
+          <!-- Register Form -->
+          <div id="register-form" class="form-container" style="display: none">
+            <h2>Register</h2>
+            <form id="registerForm">
+              <div class="form-group">
+                <label for="register-username">Username</label>
+                <input
+                  type="text"
+                  id="register-username"
+                  name="username"
+                  required
+                  pattern="[a-zA-Z0-9_-]+"
+                  minlength="3"
+                  maxlength="30"
+                  autocomplete="username"
+                />
+                <small
+                  >3-30 characters, letters, numbers, underscore, hyphen
+                  only</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="register-password">Password</label>
+                <input
+                  type="password"
+                  id="register-password"
+                  name="password"
+                  required
+                  minlength="8"
+                  maxlength="128"
+                  autocomplete="new-password"
+                />
+                <small
+                  >Min 8 chars, must include uppercase, lowercase, number, and
+                  special character</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="register-confirm">Confirm Password</label>
+                <input
+                  type="password"
+                  id="register-confirm"
+                  name="confirmPassword"
+                  required
+                  minlength="8"
+                  maxlength="128"
+                  autocomplete="new-password"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Register</button>
+              <p class="form-switch">
+                Already have an account?
+                <a href="#" id="show-login">Login</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Dashboard -->
+      <div id="notes-container" class="container" style="display: none">
+        <div class="header">
+          <h1>📝 My Notes</h1>
+          <div class="header-actions">
+            <span id="user-info"></span>
+            <button id="logout-btn" class="btn btn-secondary">Logout</button>
+          </div>
+        </div>
+
+        <div class="notes-layout">
+          <!-- Notes List -->
+          <div class="notes-list">
+            <button id="new-note-btn" class="btn btn-primary btn-block">
+              + New Note
+            </button>
+            <div id="notes-items"></div>
+          </div>
+
+          <!-- Note Editor -->
+          <div class="note-editor">
+            <div id="empty-state">
+              <p>Select a note or create a new one</p>
+            </div>
+            <div id="editor-form" style="display: none">
+              <form id="noteForm">
+                <input type="hidden" id="note-id" />
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="note-title"
+                    name="title"
+                    placeholder="Note Title"
+                    required
+                    maxlength="200"
+                  />
+                </div>
+                <div class="form-group">
+                  <textarea
+                    id="note-content"
+                    name="content"
+                    placeholder="Note content..."
+                    required
+                    rows="15"
+                    maxlength="10000"
+                  ></textarea>
+                </div>
+                <div class="editor-actions">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button
+                    type="button"
+                    id="delete-note-btn"
+                    class="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    type="button"
+                    id="cancel-note-btn"
+                    class="btn btn-secondary"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div id="error-message" class="error-toast" style="display: none"></div>
+      <div
+        id="success-message"
+        class="success-toast"
+        style="display: none"
+      ></div>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
