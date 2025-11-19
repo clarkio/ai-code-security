@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Notes</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <section class="panel">
+        <div class="header">
+          <div>
+            <div class="pill">Secure Notes</div>
+            <h1>Stay Organized</h1>
+            <p class="muted">Fast, secure note-taking powered by HTTP-only sessions and CSRF protection.</p>
+          </div>
+          <div class="muted" id="username-label"></div>
+        </div>
+        <div id="status" class="status hidden"></div>
+        <div id="auth-forms">
+          <h3>Create Account</h3>
+          <form id="register-form">
+            <div>
+              <label for="register-username">Username</label>
+              <input id="register-username" name="username" autocomplete="username" required />
+            </div>
+            <div>
+              <label for="register-password">Password</label>
+              <input id="register-password" name="password" type="password" autocomplete="new-password" required />
+              <div class="muted">Min 12 chars with upper/lower/number/symbol.</div>
+            </div>
+            <button type="submit">Register</button>
+          </form>
+          <hr />
+          <h3>Sign In</h3>
+          <form id="login-form">
+            <div>
+              <label for="login-username">Username</label>
+              <input id="login-username" name="username" autocomplete="username" required />
+            </div>
+            <div>
+              <label for="login-password">Password</label>
+              <input id="login-password" name="password" type="password" autocomplete="current-password" required />
+            </div>
+            <button type="submit">Login</button>
+          </form>
+        </div>
+        <div id="notes-panel" class="hidden">
+          <div class="header">
+            <h3>New Note</h3>
+            <button id="logout-btn" class="button-secondary">Logout</button>
+          </div>
+          <form id="note-form">
+            <div>
+              <label for="note-title">Title</label>
+              <input id="note-title" name="title" required maxlength="150" />
+            </div>
+            <div>
+              <label for="note-content">Content</label>
+              <textarea id="note-content" name="content" required maxlength="5000"></textarea>
+            </div>
+            <button type="submit">Save Note</button>
+          </form>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="header">
+          <h2>Your Notes</h2>
+          <div class="muted">Data is scoped to your account.</div>
+        </div>
+        <div id="notes" class="notes-grid"></div>
+      </section>
+    </div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
