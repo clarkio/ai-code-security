@@ -1,0 +1,44 @@
+{
+  "name": "secure-notes-app",
+  "version": "1.0.0",
+  "description": "A secure, production-ready notes application",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node src/server.js",
+    "dev": "NODE_ENV=development node src/server.js",
+    "test": "jest --coverage",
+    "lint": "eslint src/",
+    "audit": "npm audit --audit-level=moderate"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.1",
+    "better-sqlite3": "^9.2.2",
+    "hpp": "^0.2.3",
+    "xss": "^1.0.14",
+    "cookie-parser": "^1.4.6",
+    "winston": "^3.11.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-plugin-security": "^2.1.0",
+    "jest": "^29.7.0"
+  },
+  "keywords": [
+    "notes",
+    "secure",
+    "nodejs",
+    "express"
+  ],
+  "license": "MIT"
+}

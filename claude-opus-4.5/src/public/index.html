@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Secure Notes Application" />
+    <!-- CSP meta tag as additional layer (server sends header too) -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; form-action 'self';"
+    />
+    <title>Secure Notes</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Auth Section -->
+      <div id="auth-section" class="container">
+        <h1>🔒 Secure Notes</h1>
+
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="login">Login</button>
+          <button class="tab-btn" data-tab="register">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <label for="login-username">Username</label>
+            <input
+              type="text"
+              id="login-username"
+              name="username"
+              required
+              autocomplete="username"
+              maxlength="30"
+              pattern="[a-zA-Z0-9_]+"
+            />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              required
+              autocomplete="current-password"
+              maxlength="128"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <div id="login-error" class="error-message" role="alert"></div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="auth-form hidden">
+          <div class="form-group">
+            <label for="register-username">Username</label>
+            <input
+              type="text"
+              id="register-username"
+              name="username"
+              required
+              autocomplete="username"
+              minlength="3"
+              maxlength="30"
+              pattern="[a-zA-Z0-9_]+"
+              title="Username can only contain letters, numbers, and underscores"
+            />
+            <small>3-30 characters, letters, numbers, underscores only</small>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input
+              type="email"
+              id="register-email"
+              name="email"
+              required
+              autocomplete="email"
+              maxlength="254"
+            />
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input
+              type="password"
+              id="register-password"
+              name="password"
+              required
+              autocomplete="new-password"
+              minlength="12"
+              maxlength="128"
+            />
+            <small
+              >At least 12 characters with uppercase, lowercase, number, and
+              special character</small
+            >
+          </div>
+          <div class="form-group">
+            <label for="register-confirm-password">Confirm Password</label>
+            <input
+              type="password"
+              id="register-confirm-password"
+              name="confirmPassword"
+              required
+              autocomplete="new-password"
+              maxlength="128"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+          <div id="register-error" class="error-message" role="alert"></div>
+        </form>
+      </div>
+
+      <!-- Notes Section -->
+      <div id="notes-section" class="container hidden">
+        <header class="header">
+          <h1>📝 My Notes</h1>
+          <div class="header-actions">
+            <span id="user-display"></span>
+            <button id="logout-btn" class="btn btn-secondary">Logout</button>
+          </div>
+        </header>
+
+        <!-- Create Note Form -->
+        <form id="note-form" class="note-form">
+          <div class="form-group">
+            <label for="note-title">Title</label>
+            <input
+              type="text"
+              id="note-title"
+              name="title"
+              required
+              maxlength="200"
+              placeholder="Note title..."
+            />
+          </div>
+          <div class="form-group">
+            <label for="note-content">Content</label>
+            <textarea
+              id="note-content"
+              name="content"
+              required
+              maxlength="50000"
+              rows="4"
+              placeholder="Write your note..."
+            ></textarea>
+          </div>
+          <input type="hidden" id="note-id" name="id" />
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="save-note-btn">
+              Save Note
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary hidden"
+              id="cancel-edit-btn"
+            >
+              Cancel
+            </button>
+          </div>
+          <div id="note-error" class="error-message" role="alert"></div>
+        </form>
+
+        <!-- Search -->
+        <div class="search-box">
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Search notes..."
+            maxlength="100"
+          />
+        </div>
+
+        <!-- Notes List -->
+        <div
+          id="notes-list"
+          class="notes-list"
+          role="list"
+          aria-label="Notes"
+        ></div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="pagination"></div>
+      </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>
