@@ -19,7 +19,7 @@
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.0",
     "express-session": "^1.18.1",
-    "express-validator": "^7.2.1",
+    "express-validator": "^7.3.0",
     "helmet": "^8.1.0",
     "sqlite3": "^5.1.7"
   }
