@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %> - Secure Notes</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <% if (user) { %>
+        <li><a href="/notes">My Notes</a></li>
+        <li>
+          <form action="/logout" method="POST" style="display: inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button type="submit">Logout</button>
+          </form>
+        </li>
+        <% } else { %>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+        <% } %>
+      </ul>
+    </nav>
+    <div class="container"></div>
+  </body>
+</html>

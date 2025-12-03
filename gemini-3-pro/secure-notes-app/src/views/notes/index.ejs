@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+<h1>My Notes</h1>
+<a href="/notes/create">Create New Note</a>
+<ul>
+  <% notes.forEach(function(note) { %>
+  <li>
+    <h3><%= note.title %></h3>
+    <p><%= note.content %></p>
+    <small>Created at: <%= note.created_at %></small>
+    <a href="/notes/edit/<%= note.id %>">Edit</a>
+    <form
+      action="/notes/delete/<%= note.id %>"
+      method="POST"
+      style="display: inline"
+    >
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <button type="submit" onclick="return confirm('Are you sure?')">
+        Delete
+      </button>
+    </form>
+  </li>
+  <% }); %>
+</ul>
+<%- include('../partials/footer') %>

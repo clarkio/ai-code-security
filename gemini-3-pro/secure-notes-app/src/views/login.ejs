@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<h1>Login</h1>
+<% if (errors) { %>
+<ul>
+  <% errors.forEach(function(error) { %>
+  <li style="color: red"><%= error.msg %></li>
+  <% }); %>
+</ul>
+<% } %>
+<form action="/login" method="POST">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required />
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required />
+  </div>
+  <button type="submit">Login</button>
+</form>
+<%- include('partials/footer') %>
