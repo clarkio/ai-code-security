@@ -38,4 +38,5 @@ npm test
 - Ensure `TRUST_PROXY=true` when behind a proxy so secure cookie flags work.
 
 ## Security checklist
+
 See SECURITY.md for detailed recommendations and checklist.
