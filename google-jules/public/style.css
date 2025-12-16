@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+#messageArea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+#messageArea.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#messageArea.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+#registrationFormArea, #loginFormArea, #noteManagementArea {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#logoutButton {
+    background-color: #dc3545;
+}
+#logoutButton:hover {
+    background-color: #c82333;
+}
+
+#cancelUpdateButton {
+    background-color: #6c757d;
+}
+#cancelUpdateButton:hover {
+    background-color: #5a6268;
+}
+
+
+#notesList {
+    margin-top: 20px;
+}
+
+.note {
+    background-color: #e9ecef;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+.note h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.note p {
+    margin-bottom: 10px;
+    white-space: pre-wrap; /* So newlines in content are respected */
+}
+
+.note .actions button {
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-right: 5px;
+}
