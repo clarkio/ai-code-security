@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+prisma/*.db
+prisma/*.db-journal
+coverage/
+prisma

@@ -1,0 +1,21 @@
+<div style="display:flex; justify-content: space-between; align-items: baseline;">
+  <h2>Your notes</h2>
+  <a href="/notes/new">New note</a>
+</div>
+
+<% if (notes.length === 0) { %>
+  <p class="muted">No notes yet.</p>
+<% } %>
+
+<% for (const n of notes) { %>
+  <div class="note">
+    <h3><%= n.title %></h3>
+    <p class="muted"><%= new Date(n.updatedAt).toLocaleString() %></p>
+    <p><%= n.content %></p>
+    <a href="/notes/<%= n.id %>/edit">Edit</a>
+    <form action="/notes/<%= n.id %>/delete" method="post" style="display:inline">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+<% } %>

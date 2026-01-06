@@ -1,0 +1,17 @@
+<header>
+  <div>
+    <h1><a href="/notes">Secure Notes</a></h1>
+  </div>
+  <nav>
+    <% if (user) { %>
+      <span class="muted"><%= user.email %></span>
+      <form action="/logout" method="post" style="display:inline">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit">Logout</button>
+      </form>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } %>
+  </nav>
+</header>

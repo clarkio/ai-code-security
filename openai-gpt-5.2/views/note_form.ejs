@@ -1,0 +1,10 @@
+<h2><%= heading %></h2>
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+  <label>Title</label>
+  <input name="title" value="<%= note?.title ?? '' %>" maxlength="100" required />
+  <label>Content</label>
+  <textarea name="content" maxlength="5000"><%= note?.content ?? '' %></textarea>
+  <button type="submit"><%= submitLabel %></button>
+</form>
+<p><a href="/notes">Back</a></p>
