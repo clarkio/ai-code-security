@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Secure Notes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Secure Notes</h1>
+      <nav id="nav" class="hidden">
+        <span id="user-display"></span>
+        <button id="logout-btn" class="btn btn-secondary">Logout</button>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <div id="auth-section">
+        <div class="auth-tabs">
+          <button id="login-tab" class="tab active">Login</button>
+          <button id="register-tab" class="tab">Register</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" name="username" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        <form id="register-form" class="auth-form hidden">
+          <div class="form-group">
+            <label for="register-username">Username</label>
+            <input type="text" id="register-username" name="username" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" name="email" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" name="password" required autocomplete="new-password">
+            <small>Min 12 chars: uppercase, lowercase, number, special char</small>
+          </div>
+          <div class="form-group">
+            <label for="register-confirm">Confirm Password</label>
+            <input type="password" id="register-confirm" name="confirmPassword" required autocomplete="new-password">
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+
+        <div id="auth-error" class="error hidden"></div>
+      </div>
+
+      <div id="notes-section" class="hidden">
+        <div class="notes-header">
+          <button id="new-note-btn" class="btn btn-primary">+ New Note</button>
+        </div>
+
+        <div id="notes-list" class="notes-grid"></div>
+
+        <div id="note-editor" class="editor hidden">
+          <input type="text" id="note-title" placeholder="Note title" maxlength="200">
+          <textarea id="note-content" placeholder="Write your note here..." maxlength="10000"></textarea>
+          <div class="editor-actions">
+            <button id="save-note-btn" class="btn btn-primary">Save</button>
+            <button id="cancel-note-btn" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
