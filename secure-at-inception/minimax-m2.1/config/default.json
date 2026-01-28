@@ -1,0 +1,76 @@
+/**
+ * Secure application configuration
+ * All sensitive values should be set via environment variables
+ */
+module.exports = {
+  // Server Configuration
+  port: process.env.PORT || 3000,
+  env: process.env.NODE_ENV || 'development',
+  
+  // Security Configuration
+  security: {
+    // Session Configuration
+    session: {
+      secret: process.env.SESSION_SECRET || 'change-this-in-production-min-32-chars!',
+      name: '__session',
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      rolling: true
+    },
+    
+    // JWT Configuration
+    jwt: {
+      secret: process.env.JWT_SECRET || 'jwt-secret-must-be-at-least-32-characters!',
+      expiresIn: '24h',
+      algorithm: 'HS256'
+    },
+    
+    // Rate Limiting
+    rateLimit: {
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 100, // limit each IP to 100 requests per windowMs
+      message: 'Too many requests, please try again later.'
+    },
+    
+    // Password Policy
+    password: {
+      minLength: 12,
+      requireUppercase: true,
+      requireLowercase: true,
+      requireNumbers: true,
+      requireSpecialChars: true,
+      maxLength: 128,
+      bcryptRounds: 12
+    },
+    
+    // Input Validation
+    input: {
+      maxTitleLength: 200,
+      maxContentLength: 10000,
+      maxUsernameLength: 50
+    }
+  },
+  
+  // Logging Configuration
+  logging: {
+    level: process.env.LOG_LEVEL || 'info',
+    format: 'json',
+    timestamp: true
+  },
+  
+  // CORS Configuration
+  cors: {
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    maxAge: 86400 // 24 hours
+  },
+  
+  // Database Configuration
+  database: {
+    path: process.env.DATABASE_PATH || './data/notes.db'
+  }
+};

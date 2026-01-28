@@ -1,0 +1,54 @@
+{
+  "port": 3000,
+  "env": "development",
+  "security": {
+    "session": {
+      "secret": "change-this-in-production-min-32-chars!",
+      "name": "__session",
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "strict",
+      "maxAge": 86400000,
+      "rolling": true
+    },
+    "jwt": {
+      "secret": "jwt-secret-must-be-at-least-32-characters!",
+      "expiresIn": "24h",
+      "algorithm": "HS256"
+    },
+    "rateLimit": {
+      "windowMs": 900000,
+      "max": 100,
+      "message": "Too many requests, please try again later."
+    },
+    "password": {
+      "minLength": 12,
+      "requireUppercase": true,
+      "requireLowercase": true,
+      "requireNumbers": true,
+      "requireSpecialChars": true,
+      "maxLength": 128,
+      "bcryptRounds": 12
+    },
+    "input": {
+      "maxTitleLength": 200,
+      "maxContentLength": 10000,
+      "maxUsernameLength": 50
+    }
+  },
+  "logging": {
+    "level": "info",
+    "format": "json",
+    "timestamp": true
+  },
+  "cors": {
+    "origin": "http://localhost:3000",
+    "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    "allowedHeaders": ["Content-Type", "Authorization"],
+    "credentials": true,
+    "maxAge": 86400
+  },
+  "database": {
+    "path": "./data/notes.db"
+  }
+}
