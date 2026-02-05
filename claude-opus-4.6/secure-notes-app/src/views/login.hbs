@@ -1,0 +1,21 @@
+<div class="card" style="max-width: 400px; margin: 2rem auto;">
+  <h2>Login</h2>
+  {{#if errors}}
+  <ul class="errors">
+    {{#each errors}}<li>{{this}}</li>{{/each}}
+  </ul>
+  {{/if}}
+  <form method="POST" action="/login">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password">
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  <p style="margin-top: 1rem;">Don't have an account? <a href="/register">Register</a></p>
+</div>

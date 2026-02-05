@@ -1,0 +1,55 @@
+{{!-- Create / Edit form --}}
+<div class="card">
+  {{#if editNote}}
+  <h2>Edit Note</h2>
+  {{else}}
+  <h2>New Note</h2>
+  {{/if}}
+
+  {{#if errors}}
+  <ul class="errors">
+    {{#each errors}}<li>{{this}}</li>{{/each}}
+  </ul>
+  {{/if}}
+
+  <form method="POST" action="{{#if editNote}}/notes/{{editNote.id}}/edit{{else}}/notes{{/if}}">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" maxlength="200" required value="{{#if editNote}}{{editNote.title}}{{/if}}">
+    </div>
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea id="content" name="content" maxlength="10000" required>{{#if editNote}}{{editNote.content}}{{/if}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">
+      {{#if editNote}}Update Note{{else}}Create Note{{/if}}
+    </button>
+    {{#if editNote}}
+    <a href="/" class="btn" style="margin-left: 0.5rem;">Cancel</a>
+    {{/if}}
+  </form>
+</div>
+
+{{!-- Notes list --}}
+<h2 style="margin: 1.5rem 0 1rem;">Your Notes</h2>
+{{#if notes.length}}
+  {{#each notes}}
+  <div class="card note">
+    <div class="note-header">
+      <h3>{{this.title}}</h3>
+      <div class="note-actions">
+        <a href="/notes/{{this.id}}/edit" class="btn btn-primary btn-sm">Edit</a>
+        <form method="POST" action="/notes/{{this.id}}/delete" style="display:inline;">
+          <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+          <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this note?')">Delete</button>
+        </form>
+      </div>
+    </div>
+    <p>{{this.content}}</p>
+    <p class="note-meta">Updated: {{this.updated_at}}</p>
+  </div>
+  {{/each}}
+{{else}}
+  <p style="color: #888;">No notes yet. Create your first note above.</p>
+{{/if}}

@@ -1,0 +1,22 @@
+{
+  "name": "secure-notes-app",
+  "version": "1.0.0",
+  "description": "Production-ready secure notes application",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-handlebars": "^8.0.1",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.0.0",
+    "session-file-store": "^1.5.0",
+    "sql.js": "^1.12.0"
+  }
+}
