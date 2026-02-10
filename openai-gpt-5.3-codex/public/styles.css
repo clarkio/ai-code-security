@@ -1,0 +1,124 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f4f7fb;
+  color: #111827;
+}
+
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem 2rem;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 0.75rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  margin-top: 0.3rem;
+  border: 1px solid #9ca3af;
+  border-radius: 8px;
+  padding: 0.6rem 0.7rem;
+  font: inherit;
+  background: #fff;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: #0f172a;
+  color: #fff;
+}
+
+button.secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+button.danger {
+  background: #b91c1c;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.notes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.note-item {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.8rem;
+  background: #f9fafb;
+}
+
+.note-item pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0.5rem 0;
+  font: inherit;
+}
+
+.meta {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+#status {
+  min-height: 1.4rem;
+}
+
+#status.ok {
+  color: #065f46;
+}
+
+#status.error {
+  color: #991b1b;
+}
+
+@media (max-width: 600px) {
+  .actions {
+    flex-wrap: wrap;
+  }
+}
