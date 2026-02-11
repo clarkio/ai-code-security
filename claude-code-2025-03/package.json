@@ -10,7 +10,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "connect-mongo": "^5.1.0",
     "csurf": "^1.11.0",
     "dotenv": "^16.3.1",
