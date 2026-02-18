@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Secure Notes' %></title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 1.5rem; line-height: 1.5; }
+    nav { display: flex; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #ddd; }
+    nav a { color: #0066cc; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    .error { color: #c00; font-size: 0.9rem; margin: 0.5rem 0; }
+    input, textarea { width: 100%; padding: 0.5rem; margin: 0.25rem 0 1rem; font-size: 1rem; }
+    textarea { min-height: 120px; resize: vertical; }
+    button, .btn { display: inline-block; padding: 0.5rem 1rem; background: #0066cc; color: #fff; border: none; cursor: pointer; text-decoration: none; font-size: 1rem; }
+    button:hover, .btn:hover { background: #0052a3; }
+    .btn-danger { background: #c00; }
+    .btn-danger:hover { background: #a00; }
+    .note-list { list-style: none; padding: 0; }
+    .note-list li { padding: 0.75rem 0; border-bottom: 1px solid #eee; }
+    .note-list a { color: inherit; text-decoration: none; font-weight: 500; }
+    .note-list a:hover { text-decoration: underline; }
+    .note-meta { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
+  </style>
+</head>
+<body>
+  <% if (typeof user !== 'undefined' && user) { %>
+  <nav>
+    <a href="/notes">My Notes</a>
+    <a href="/notes/new">New Note</a>
+    <span style="margin-left: auto;"><%= user.username %></span>
+    <form action="/logout" method="post" style="display: inline;">
+      <input type="hidden" name="_csrf" value="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>">
+      <button type="submit">Log out</button>
+    </form>
+  </nav>
+  <% } %>
+  <main>
+    <%- body %>
+  </main>
+</body>
+</html>

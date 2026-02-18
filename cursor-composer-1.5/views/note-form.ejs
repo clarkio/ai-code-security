@@ -1,0 +1,19 @@
+<h1><%= note ? 'Edit Note' : 'New Note' %></h1>
+<% if (typeof errors !== 'undefined' && errors.length) { %>
+  <% errors.forEach(err => { %>
+    <p class="error"><%= err.msg %></p>
+  <% }); %>
+<% } %>
+<form method="post" action="<%= note ? '/notes/' + note.id : '/notes' %>">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Title</label>
+  <input type="text" name="title" value="<%= note ? note.title : '' %>" required maxlength="200">
+  <label>Content</label>
+  <textarea name="content" maxlength="10000"><%= note ? note.content : '' %></textarea>
+  <button type="submit"><%= note ? 'Save' : 'Create' %></button>
+  <% if (note) { %>
+    <a href="/notes/<%= note.id %>">Cancel</a>
+  <% } else { %>
+    <a href="/notes">Cancel</a>
+  <% } %>
+</form>

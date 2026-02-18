@@ -1,0 +1,15 @@
+<h1>Log in</h1>
+<% if (typeof errors !== 'undefined' && errors.length) { %>
+  <% errors.forEach(err => { %>
+    <p class="error"><%= err.msg %></p>
+  <% }); %>
+<% } %>
+<form method="post" action="/login">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Username</label>
+  <input type="text" name="username" autocomplete="username" required>
+  <label>Password</label>
+  <input type="password" name="password" autocomplete="current-password" required>
+  <button type="submit">Log in</button>
+</form>
+<p>Don't have an account? <a href="/register">Register</a></p>

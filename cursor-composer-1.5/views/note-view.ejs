@@ -1,0 +1,10 @@
+<h1><%= note.title %></h1>
+<p class="note-meta">Updated <%= note.updated_at %></p>
+<div style="white-space: pre-wrap;"><%= note.content %></div>
+<p>
+  <a href="/notes/<%= note.id %>/edit" class="btn">Edit</a>
+  <form action="/notes/<%= note.id %>/delete" method="post" style="display: inline; margin-left: 0.5rem;">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit" class="btn-danger" onclick="return confirm('Delete this note?')">Delete</button>
+  </form>
+</p>

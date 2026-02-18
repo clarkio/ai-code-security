@@ -1,0 +1,17 @@
+<h1>Register</h1>
+<% if (typeof errors !== 'undefined' && errors.length) { %>
+  <% errors.forEach(err => { %>
+    <p class="error"><%= err.msg %></p>
+  <% }); %>
+<% } %>
+<form method="post" action="/register">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Username (3-32 chars, letters, numbers, _ -)</label>
+  <input type="text" name="username" autocomplete="username" required minlength="3" maxlength="32" pattern="[a-zA-Z0-9_-]+">
+  <label>Password (min 12 chars, upper, lower, number)</label>
+  <input type="password" name="password" autocomplete="new-password" required minlength="12">
+  <label>Confirm password</label>
+  <input type="password" name="passwordConfirm" autocomplete="new-password" required>
+  <button type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="/login">Log in</a></p>
