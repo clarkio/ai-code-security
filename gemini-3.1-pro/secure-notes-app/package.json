@@ -1,0 +1,24 @@
+{
+  "name": "secure-notes-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "sqlocal": "^0.17.0",
+    "zod": "^4.3.6"
+  }
+}

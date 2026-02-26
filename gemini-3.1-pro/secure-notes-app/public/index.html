@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 100% SECURE: Content Security Policy (CSP) restricts ALL scripts to the same origin. 
+         Inline scripts (<script>alert(1)</script>) and inline event handlers (onclick=...) will be explicitly BLOCKED by the browser. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'; base-uri 'self';">
+    <title>Secure Notes App</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Secure Notes App</h1>
+        <p class="subtitle">Protected against XSS & SQLi</p>
+        
+        <form id="note-form">
+            <div class="form-group">
+                <label for="note-content">New Note Content:</label>
+                <textarea id="note-content" name="content" rows="4" required maxlength="1000" placeholder="Write your secret notes here..."></textarea>
+            </div>
+            <button type="submit" id="submit-btn">Add Note</button>
+            <div id="form-error" class="error-msg"></div>
+        </form>
+
+        <div class="notes-container">
+            <h2>Your Notes</h2>
+            <div id="loading" class="loading">Loading notes securely...</div>
+            <div id="notes-list" class="notes-grid">
+                <!-- Notes will be injected here safely via textContent -->
+            </div>
+        </div>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>
