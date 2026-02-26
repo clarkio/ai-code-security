@@ -15,7 +15,7 @@
     "ejs": "^3.1.9",
     "express": "^4.19.2",
     "express-rate-limit": "^7.0.0",
-    "express-session": "^1.17.3",
+    "express-session": "^1.18.2",
     "helmet": "^7.0.0",
     "sqlite3": "^5.1.6",
     "xss-clean": "^0.1.1"
