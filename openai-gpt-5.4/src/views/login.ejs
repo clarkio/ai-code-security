@@ -1,0 +1,39 @@
+<%- include("partials/head", { title }) %>
+<main class="shell shell--narrow">
+  <section class="panel panel--auth">
+    <h1>Sign in</h1>
+    <p class="lede">Only authenticated users can access notes.</p>
+
+    <% if (errorMessage) { %>
+      <div class="alert" role="alert"><%= errorMessage %></div>
+    <% } %>
+
+    <form method="post" action="/login" class="stack-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+      <label for="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="text"
+        maxlength="100"
+        autocomplete="username"
+        required
+        value="<%= formData.username || '' %>"
+      />
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        maxlength="256"
+        autocomplete="current-password"
+        required
+      />
+
+      <button type="submit">Sign in</button>
+    </form>
+  </section>
+</main>
+<%- include("partials/footer") %>

@@ -1,0 +1,73 @@
+<%- include("../partials/head", { title }) %>
+<main class="shell">
+  <%- include("../partials/header") %>
+
+  <section class="panel">
+    <div class="panel-heading">
+      <div>
+        <h1>Create note</h1>
+        <p class="lede">Every mutation is authenticated, validated, rate-limited, and CSRF-protected.</p>
+      </div>
+    </div>
+
+    <% if (errorMessage) { %>
+      <div class="alert" role="alert"><%= errorMessage %></div>
+    <% } %>
+
+    <form method="post" action="/notes" class="stack-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+      <label for="title">Title</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        maxlength="120"
+        required
+        value="<%= formData.title || '' %>"
+      />
+
+      <label for="content">Content</label>
+      <textarea
+        id="content"
+        name="content"
+        maxlength="5000"
+        rows="7"
+        required
+      ><%= formData.content || '' %></textarea>
+
+      <button type="submit">Save note</button>
+    </form>
+  </section>
+
+  <section class="panel">
+    <div class="panel-heading">
+      <div>
+        <h2>Saved notes</h2>
+        <p class="lede">Output is escaped by default in the template layer.</p>
+      </div>
+    </div>
+
+    <% if (!notes.length) { %>
+      <p class="empty-state">No notes yet.</p>
+    <% } %>
+
+    <div class="notes-grid">
+      <% notes.forEach((note) => { %>
+        <article class="note-card">
+          <h3><%= note.title %></h3>
+          <p class="note-meta">Updated <%= note.updated_at %></p>
+          <pre class="note-content"><%= note.content %></pre>
+          <div class="note-actions">
+            <a href="/notes/<%= note.id %>/edit" class="link-button">Edit</a>
+            <form method="post" action="/notes/<%= note.id %>/delete" class="inline-form">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="danger-button">Delete</button>
+            </form>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </section>
+</main>
+<%- include("../partials/footer") %>

@@ -1,0 +1,12 @@
+<header class="site-header">
+  <div>
+    <a class="brand" href="/notes">Secure Notes</a>
+    <p class="tagline">Minimal note taking with defensive defaults.</p>
+  </div>
+  <% if (currentUser) { %>
+    <form method="post" action="/logout" class="inline-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <button type="submit" class="secondary-button">Sign out</button>
+    </form>
+  <% } %>
+</header>

@@ -1,0 +1,15 @@
+<%- include("partials/head", { title }) %>
+<main class="shell shell--narrow">
+  <% if (currentUser) { %>
+    <%- include("partials/header") %>
+  <% } %>
+
+  <section class="panel">
+    <h1><%= title %></h1>
+    <p class="lede"><%= errorMessage %></p>
+    <p>
+      <a href="<%= currentUser ? '/notes' : '/login' %>" class="secondary-link">Return</a>
+    </p>
+  </section>
+</main>
+<%- include("partials/footer") %>

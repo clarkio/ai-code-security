@@ -1,0 +1,33 @@
+{
+  "name": "openai-gpt-5.4",
+  "version": "1.0.0",
+  "description": "Secure Express notes app with authentication and hardened defaults.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test",
+    "hash-password": "node scripts/hash-password.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "csrf-sync": "^4.2.1",
+    "dotenv": "^17.3.1",
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.3.1",
+    "express-session": "^1.19.0",
+    "helmet": "^8.1.0",
+    "pino-http": "^11.0.0",
+    "session-file-store": "^1.5.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "supertest": "^7.2.2"
+  }
+}

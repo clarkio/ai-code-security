@@ -1,0 +1,46 @@
+<%- include("../partials/head", { title }) %>
+<main class="shell shell--narrow">
+  <%- include("../partials/header") %>
+
+  <section class="panel">
+    <div class="panel-heading">
+      <div>
+        <h1>Edit note</h1>
+        <p class="lede">Changes write through a parameterized statement and replace the stored values atomically.</p>
+      </div>
+    </div>
+
+    <% if (errorMessage) { %>
+      <div class="alert" role="alert"><%= errorMessage %></div>
+    <% } %>
+
+    <form method="post" action="/notes/<%= note.id %>" class="stack-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+      <label for="title">Title</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        maxlength="120"
+        required
+        value="<%= note.title %>"
+      />
+
+      <label for="content">Content</label>
+      <textarea
+        id="content"
+        name="content"
+        maxlength="5000"
+        rows="10"
+        required
+      ><%= note.content %></textarea>
+
+      <div class="form-actions">
+        <button type="submit">Update note</button>
+        <a href="/notes" class="secondary-link">Cancel</a>
+      </div>
+    </form>
+  </section>
+</main>
+<%- include("../partials/footer") %>
