@@ -1,0 +1,24 @@
+<div class="page-head">
+  <h1>Your notes</h1>
+  <a class="button" href="/notes/new">New note</a>
+</div>
+<% if (!notes.length) { %>
+  <p class="muted">You have no notes yet. Create one to get started.</p>
+<% } else { %>
+  <ul class="note-list">
+    <% notes.forEach(function (n) { %>
+      <li class="note-card">
+        <h2 class="note-title"><%= n.title %></h2>
+        <p class="note-preview"><%= n.body %></p>
+        <div class="note-actions">
+          <a href="/notes/<%= n.id %>/edit">Edit</a>
+          <form method="post" action="/notes/<%= n.id %>/delete" class="inline-form" data-confirm-delete>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="link-button danger">Delete</button>
+          </form>
+        </div>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+<script src="/static/js/delete-confirm.js" defer></script>

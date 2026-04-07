@@ -1,0 +1,18 @@
+<h1>Create account</h1>
+<% if (error) { %>
+  <p class="flash error" role="alert"><%= error %></p>
+<% } %>
+<form method="post" action="/register" class="stack">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>
+    Email
+    <input type="email" name="email" autocomplete="username" required maxlength="254">
+  </label>
+  <label>
+    Password
+    <input type="password" name="password" autocomplete="new-password" required minlength="12" maxlength="72">
+  </label>
+  <p class="hint">Use at least 12 characters. A password manager is recommended.</p>
+  <button type="submit">Register</button>
+</form>
+<p class="muted">Already have an account? <a href="/login">Sign in</a></p>

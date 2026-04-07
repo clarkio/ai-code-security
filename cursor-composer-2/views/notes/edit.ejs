@@ -1,0 +1,19 @@
+<h1>Edit note</h1>
+<% if (error) { %>
+  <p class="flash error" role="alert"><%= error %></p>
+<% } %>
+<form method="post" action="/notes/<%= note.id %>" class="stack">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>
+    Title
+    <input type="text" name="title" required maxlength="200" value="<%= note.title %>">
+  </label>
+  <label>
+    Body
+    <textarea name="body" rows="12" maxlength="50000"><%= note.body %></textarea>
+  </label>
+  <div class="actions">
+    <button type="submit">Save changes</button>
+    <a href="/notes">Cancel</a>
+  </div>
+</form>
