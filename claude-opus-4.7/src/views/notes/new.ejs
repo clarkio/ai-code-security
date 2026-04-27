@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+  <h1>New note</h1>
+  <% if (error) { %>
+    <p class="error" role="alert"><%= error %></p>
+  <% } %>
+  <form action="/notes" method="post" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>
+      Title
+      <input
+        type="text"
+        name="title"
+        value="<%= values.title %>"
+        required
+        minlength="1"
+        maxlength="200"
+      />
+    </label>
+    <label>
+      Body
+      <textarea name="body" rows="10" maxlength="10000"><%= values.body %></textarea>
+    </label>
+    <div class="actions">
+      <button type="submit">Create</button>
+      <a class="btn" href="/notes">Cancel</a>
+    </div>
+  </form>
+<%- include('../partials/footer') %>

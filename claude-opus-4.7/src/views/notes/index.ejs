@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+  <div class="page-head">
+    <h1>My notes</h1>
+    <a class="btn" href="/notes/new">New note</a>
+  </div>
+
+  <% if (notes.length === 0) { %>
+    <p class="muted">You don't have any notes yet.</p>
+  <% } else { %>
+    <ul class="notes">
+      <% notes.forEach(function(note) { %>
+        <li class="note">
+          <h2><%= note.title %></h2>
+          <% if (note.body) { %>
+            <pre class="body"><%= note.body %></pre>
+          <% } %>
+          <p class="meta">
+            Updated <time datetime="<%= new Date(note.updated_at * 1000).toISOString() %>">
+              <%= new Date(note.updated_at * 1000).toISOString() %>
+            </time>
+          </p>
+          <div class="actions">
+            <a class="btn" href="/notes/<%= note.id %>/edit">Edit</a>
+            <form action="/notes/<%= note.id %>/delete" method="post" class="inline">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="btn danger">Delete</button>
+            </form>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+<%- include('../partials/footer') %>

@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+  <h1>Sign up</h1>
+  <% if (error) { %>
+    <p class="error" role="alert"><%= error %></p>
+  <% } %>
+  <form action="/signup" method="post" autocomplete="on" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>
+      Username
+      <input
+        type="text"
+        name="username"
+        value="<%= username %>"
+        required
+        minlength="3"
+        maxlength="32"
+        pattern="[a-zA-Z0-9_.\-]+"
+        autocomplete="username"
+        autocapitalize="off"
+        spellcheck="false"
+      />
+      <small>3&ndash;32 characters: letters, digits, "_", ".", "-".</small>
+    </label>
+    <label>
+      Password
+      <input
+        type="password"
+        name="password"
+        required
+        minlength="12"
+        maxlength="128"
+        autocomplete="new-password"
+      />
+      <small>At least 12 characters. Use a passphrase or a password manager.</small>
+    </label>
+    <button type="submit">Create account</button>
+  </form>
+  <p>Already have an account? <a href="/login">Log in</a>.</p>
+<%- include('partials/footer') %>

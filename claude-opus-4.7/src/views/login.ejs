@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+  <h1>Log in</h1>
+  <% if (error) { %>
+    <p class="error" role="alert"><%= error %></p>
+  <% } %>
+  <form action="/login" method="post" autocomplete="on" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>
+      Username
+      <input
+        type="text"
+        name="username"
+        value="<%= username %>"
+        required
+        minlength="3"
+        maxlength="32"
+        autocomplete="username"
+        autocapitalize="off"
+        spellcheck="false"
+      />
+    </label>
+    <label>
+      Password
+      <input
+        type="password"
+        name="password"
+        required
+        minlength="12"
+        maxlength="128"
+        autocomplete="current-password"
+      />
+    </label>
+    <button type="submit">Log in</button>
+  </form>
+  <p>No account? <a href="/signup">Sign up</a>.</p>
+<%- include('partials/footer') %>
