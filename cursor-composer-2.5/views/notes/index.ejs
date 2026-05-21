@@ -1,0 +1,28 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/header') %>
+<section class="notes-header">
+  <h1>My notes</h1>
+  <a class="button" href="/notes/new">New note</a>
+</section>
+
+<% if (notes.length === 0) { %>
+  <p class="muted">You have no notes yet. Create your first note.</p>
+<% } else { %>
+  <ul class="note-list">
+    <% notes.forEach(function(note) { %>
+      <li class="note-card">
+        <h2><%= note.title %></h2>
+        <p class="note-preview"><%= note.body %></p>
+        <p class="note-meta">Updated <%= note.updated_at %></p>
+        <div class="note-actions">
+          <a href="/notes/<%= note.id %>/edit">Edit</a>
+          <form method="post" action="/notes/<%= note.id %>/delete" class="inline-form">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="danger-button" data-confirm="Delete this note?">Delete</button>
+          </form>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+<%- include('../partials/footer') %>

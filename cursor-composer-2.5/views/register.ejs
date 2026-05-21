@@ -1,0 +1,21 @@
+<%- include('partials/head', { title }) %>
+<%- include('partials/header') %>
+<section class="card auth-card">
+  <h1>Create account</h1>
+  <form method="post" action="/register" autocomplete="on">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" required minlength="3" maxlength="32" pattern="[a-zA-Z0-9_-]+" autocomplete="username">
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required minlength="12" maxlength="128" autocomplete="new-password">
+    <p class="hint">At least 12 characters.</p>
+
+    <label for="confirmPassword">Confirm password</label>
+    <input id="confirmPassword" name="confirmPassword" type="password" required minlength="12" maxlength="128" autocomplete="new-password">
+
+    <button type="submit">Create account</button>
+  </form>
+  <p class="muted">Already registered? <a href="/login">Sign in</a></p>
+</section>
+<%- include('partials/footer') %>

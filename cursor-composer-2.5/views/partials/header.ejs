@@ -1,0 +1,17 @@
+  <header class="site-header">
+    <a href="/" class="logo">Secure Notes</a>
+    <% if (isAuthenticated) { %>
+      <nav>
+        <span class="user-label">Signed in as <strong><%= currentUser %></strong></span>
+        <a href="/notes">Notes</a>
+        <form class="inline-form" method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link-button">Sign out</button>
+        </form>
+      </nav>
+    <% } %>
+  </header>
+  <main class="container">
+    <% if (flash) { %>
+      <div class="flash flash-<%= flash.type %>" role="alert"><%= flash.message %></div>
+    <% } %>

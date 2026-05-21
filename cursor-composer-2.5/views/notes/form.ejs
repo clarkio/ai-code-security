@@ -1,0 +1,19 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/header') %>
+<section class="card">
+  <h1><%= note ? 'Edit note' : 'New note' %></h1>
+  <form method="post" action="<%= formAction %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text" required maxlength="200" value="<%= note ? note.title : '' %>">
+
+    <label for="body">Body</label>
+    <textarea id="body" name="body" rows="12" maxlength="10000"><%= note ? note.body : '' %></textarea>
+
+    <div class="form-actions">
+      <button type="submit"><%= submitLabel %></button>
+      <a href="/notes">Cancel</a>
+    </div>
+  </form>
+</section>
+<%- include('../partials/footer') %>
