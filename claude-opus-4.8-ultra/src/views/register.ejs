@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<h1>Create an account</h1>
+<%- include('partials/flash', { errors: errors }) %>
+
+<form method="POST" action="/register" class="card form" autocomplete="on">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+  <label for="username">Username</label>
+  <input
+    id="username"
+    name="username"
+    type="text"
+    required
+    minlength="3"
+    maxlength="32"
+    pattern="[A-Za-z0-9_]+"
+    autocomplete="username"
+    value="<%= values.username || '' %>"
+  />
+  <small class="hint">3–32 characters: letters, numbers, underscores.</small>
+
+  <label for="password">Password</label>
+  <input
+    id="password"
+    name="password"
+    type="password"
+    required
+    minlength="12"
+    maxlength="72"
+    autocomplete="new-password"
+  />
+  <small class="hint">At least 12 characters.</small>
+
+  <button type="submit">Register</button>
+</form>
+
+<p>Already have an account? <a href="/login">Log in</a></p>
+
+<%- include('partials/footer') %>

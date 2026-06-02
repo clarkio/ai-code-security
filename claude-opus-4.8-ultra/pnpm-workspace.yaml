@@ -1,0 +1,4 @@
+# pnpm gates native build scripts by default. Explicitly allow the one native
+# dependency that needs to compile / fetch a prebuilt binary.
+allowBuilds:
+  better-sqlite3: true

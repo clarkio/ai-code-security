@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+<h1>Log in</h1>
+<%- include('partials/flash', { errors: errors }) %>
+
+<form method="POST" action="/login" class="card form" autocomplete="on">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+  <label for="username">Username</label>
+  <input
+    id="username"
+    name="username"
+    type="text"
+    required
+    maxlength="32"
+    autocomplete="username"
+    value="<%= values.username || '' %>"
+  />
+
+  <label for="password">Password</label>
+  <input
+    id="password"
+    name="password"
+    type="password"
+    required
+    maxlength="72"
+    autocomplete="current-password"
+  />
+
+  <button type="submit">Log in</button>
+</form>
+
+<p>Need an account? <a href="/register">Register</a></p>
+
+<%- include('partials/footer') %>

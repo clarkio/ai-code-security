@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title><%= title %> · Secure Notes</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Secure Notes</a>
+      <nav>
+        <% if (currentUser) { %>
+          <span class="who">Signed in as <strong><%= currentUser.username %></strong></span>
+          <form method="POST" action="/logout" class="inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button type="submit" class="link-button">Log out</button>
+          </form>
+        <% } else { %>
+          <a href="/login">Log in</a>
+          <a href="/register">Register</a>
+        <% } %>
+      </nav>
+    </header>
+    <main class="container">

@@ -1,0 +1,55 @@
+<%- include('../partials/header') %>
+
+<h1>My Notes</h1>
+<%- include('../partials/flash', { errors: typeof errors !== 'undefined' ? errors : [] }) %>
+
+<section class="card">
+  <h2>New note</h2>
+  <form method="POST" action="/notes" class="form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label for="title">Title</label>
+    <input
+      id="title"
+      name="title"
+      type="text"
+      required
+      maxlength="200"
+      value="<%= typeof values !== 'undefined' ? (values.title || '') : '' %>"
+    />
+
+    <label for="content">Content</label>
+    <textarea id="content" name="content" rows="4" maxlength="10000"><%= typeof values !== 'undefined' ? (values.content || '') : '' %></textarea>
+
+    <button type="submit">Add note</button>
+  </form>
+</section>
+
+<section class="notes-list">
+  <% if (!notes.length) { %>
+    <p class="empty">You have no notes yet. Create your first one above.</p>
+  <% } %>
+
+  <% notes.forEach(function (note) { %>
+    <article class="card note">
+      <h3><%= note.title %></h3>
+      <% if (note.content) { %>
+        <p class="note-content"><%= note.content %></p>
+      <% } %>
+      <p class="meta">Updated <%= note.updated_at %> UTC</p>
+      <div class="actions">
+        <a class="button secondary" href="/notes/<%= note.id %>/edit">Edit</a>
+        <form
+          method="POST"
+          action="/notes/<%= note.id %>/delete"
+          class="inline"
+        >
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="button danger">Delete</button>
+        </form>
+      </div>
+    </article>
+  <% }); %>
+</section>
+
+<%- include('../partials/footer') %>

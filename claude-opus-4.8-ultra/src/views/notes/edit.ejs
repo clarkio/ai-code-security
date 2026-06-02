@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<h1>Edit note</h1>
+<%- include('../partials/flash', { errors: errors }) %>
+
+<form method="POST" action="/notes/<%= note.id %>" class="card form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+  <label for="title">Title</label>
+  <input
+    id="title"
+    name="title"
+    type="text"
+    required
+    maxlength="200"
+    value="<%= note.title %>"
+  />
+
+  <label for="content">Content</label>
+  <textarea id="content" name="content" rows="8" maxlength="10000"><%= note.content %></textarea>
+
+  <div class="actions">
+    <button type="submit">Save changes</button>
+    <a class="button secondary" href="/notes">Cancel</a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>
