@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Notes App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Secure Notes App</h1>
+    <div id="messageArea"></div>
+
+    <!-- Registration Form -->
+    <div id="registrationFormArea">
+        <h2>Register</h2>
+        <form id="registrationForm">
+            <div>
+                <label for="regUsername">Username:</label>
+                <input type="text" id="regUsername" name="username" required>
+            </div>
+            <div>
+                <label for="regEmail">Email:</label>
+                <input type="email" id="regEmail" name="email" required>
+            </div>
+            <div>
+                <label for="regPassword">Password:</label>
+                <input type="password" id="regPassword" name="password" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginFormArea">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div>
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" name="email" required>
+            </div>
+            <div>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Note Management Area (Hidden by default) -->
+    <div id="noteManagementArea" style="display: none;">
+        <h2>My Notes</h2>
+        <button id="logoutButton">Logout</button>
+        
+        <div id="createNoteFormArea">
+            <h3>Create New Note</h3>
+            <form id="createNoteForm">
+                <div>
+                    <label for="noteTitle">Title:</label>
+                    <input type="text" id="noteTitle" name="title" required>
+                </div>
+                <div>
+                    <label for="noteContent">Content:</label>
+                    <textarea id="noteContent" name="content" required></textarea>
+                </div>
+                <button type="submit">Create Note</button>
+            </form>
+        </div>
+
+        <div id="updateNoteFormArea" style="display:none;">
+            <h3>Update Note</h3>
+            <form id="updateNoteForm">
+                <input type="hidden" id="updateNoteId">
+                <div>
+                    <label for="updateNoteTitle">Title:</label>
+                    <input type="text" id="updateNoteTitle" name="title" required>
+                </div>
+                <div>
+                    <label for="updateNoteContent">Content:</label>
+                    <textarea id="updateNoteContent" name="content" required></textarea>
+                </div>
+                <button type="submit">Save Update</button>
+                <button type="button" id="cancelUpdateButton">Cancel</button>
+            </form>
+        </div>
+        
+        <h3>Existing Notes</h3>
+        <div id="notesList">
+            <!-- Notes will be displayed here -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
