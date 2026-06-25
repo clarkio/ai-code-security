@@ -1,0 +1,20 @@
+<%- include('partials/header', { title, currentUser: typeof currentUser !== 'undefined' ? currentUser : null, csrfToken: typeof csrfToken !== 'undefined' ? csrfToken : '' }) %>
+
+<div class="auth-card">
+  <h1>Login</h1>
+  <form id="loginForm" class="auth-form">
+    <label>
+      Username
+      <input type="text" name="username" required maxlength="32" autocomplete="username">
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" required maxlength="128" autocomplete="current-password">
+    </label>
+    <button type="submit" class="btn btn-primary">Login</button>
+    <p class="muted">No account? <a href="/register">Register</a></p>
+  </form>
+  <div id="formError" class="error-text" hidden></div>
+</div>
+
+<%- include('partials/footer') %>

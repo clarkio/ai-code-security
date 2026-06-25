@@ -1,0 +1,46 @@
+<%- include('partials/header', { title, currentUser: typeof currentUser !== 'undefined' ? currentUser : null, csrfToken: typeof csrfToken !== 'undefined' ? csrfToken : '' }) %>
+
+<div class="notes-layout">
+  <section class="note-editor">
+    <h2 id="editorTitle">New Note</h2>
+    <form id="noteForm">
+      <input type="hidden" name="id" id="noteId" value="">
+      <label>
+        Title
+        <input type="text" name="title" id="noteTitle" required maxlength="200">
+      </label>
+      <label>
+        Body
+        <textarea name="body" id="noteBody" required maxlength="10000" rows="8"></textarea>
+      </label>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
+        <button type="button" class="btn btn-ghost" id="clearBtn">Clear</button>
+      </div>
+    </form>
+    <div id="formError" class="error-text" hidden></div>
+  </section>
+
+  <section class="notes-list">
+    <h2>Your Notes</h2>
+    <div id="notesContainer">
+      <% if (notes.length === 0) { %>
+        <p class="muted">No notes yet. Create one above.</p>
+      <% } else { %>
+        <ul class="note-list">
+          <% notes.forEach(function(note) { %>
+            <li class="note-item" data-id="<%= note.id %>">
+              <button type="button" class="note-load" data-id="<%= note.id %>">
+                <strong><%= note.title %></strong>
+                <span class="muted"><%= note.updated_at %></span>
+              </button>
+              <button type="button" class="btn btn-danger btn-sm note-delete" data-id="<%= note.id %>">Delete</button>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </section>
+</div>
+
+<%- include('partials/footer') %>
