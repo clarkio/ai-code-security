@@ -1,0 +1,18 @@
+<%- include('partials/head', { title }) %>
+<section class="edit-card" aria-labelledby="page-title">
+  <h1 id="page-title">Edit note</h1>
+  <% if (error) { %><p class="form-error" role="alert"><%= error %></p><% } %>
+  <form class="note-form" action="/notes/<%= note.id %>/update" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="hidden" name="version" value="<%= note.version %>">
+    <label for="title">Title</label>
+    <input id="title" name="title" value="<%= note.title %>" maxlength="200" required autofocus>
+    <label for="content">Note</label>
+    <textarea id="content" name="content" rows="12" maxlength="10000" required><%= note.content %></textarea>
+    <div class="note-actions">
+      <button type="submit">Save changes</button>
+      <a class="button secondary" href="/notes">Cancel</a>
+    </div>
+  </form>
+</section>
+<%- include('partials/foot') %>

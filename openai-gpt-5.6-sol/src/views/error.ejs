@@ -1,0 +1,9 @@
+<%- include('partials/head', { title }) %>
+<section class="error-card" aria-labelledby="page-title">
+  <p class="error-status"><%= status %></p>
+  <h1 id="page-title"><%= title %></h1>
+  <p><%= message %></p>
+  <p class="request-id">Reference: <%= requestId %></p>
+  <a class="button" href="/">Return home</a>
+</section>
+<%- include('partials/foot') %>

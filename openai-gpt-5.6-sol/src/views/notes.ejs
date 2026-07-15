@@ -1,0 +1,38 @@
+<%- include('partials/head', { title }) %>
+<section aria-labelledby="page-title">
+  <div class="page-heading">
+    <div>
+      <h1 id="page-title">Your notes</h1>
+      <p><%= notes.length %> note<%= notes.length === 1 ? '' : 's' %></p>
+    </div>
+  </div>
+
+  <% if (error) { %><p class="form-error" role="alert"><%= error %></p><% } %>
+  <form class="note-form" action="/notes" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="title">Title</label>
+    <input id="title" name="title" maxlength="200" required>
+    <label for="content">Note</label>
+    <textarea id="content" name="content" rows="6" maxlength="10000" required></textarea>
+    <button type="submit">Create note</button>
+  </form>
+
+  <div class="notes-grid">
+    <% for (const note of notes) { %>
+      <article class="note-card">
+        <h2><%= note.title %></h2>
+        <div class="note-content"><%= note.content %></div>
+        <p class="note-date">Updated <time datetime="<%= note.updatedAt.toISOString() %>"><%= note.updatedAt.toLocaleString('en-US', { timeZone: 'UTC' }) %> UTC</time></p>
+        <div class="note-actions">
+          <a class="button secondary" href="/notes/<%= note.id %>/edit">Edit</a>
+          <form action="/notes/<%= note.id %>/delete" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="danger" type="submit">Delete</button>
+          </form>
+        </div>
+      </article>
+    <% } %>
+  </div>
+  <% if (notes.length === 0) { %><p class="empty-state">No notes yet.</p><% } %>
+</section>
+<%- include('partials/foot') %>

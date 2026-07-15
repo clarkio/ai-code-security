@@ -1,0 +1,18 @@
+<%- include('partials/head', { title }) %>
+<section class="auth-card" aria-labelledby="page-title">
+  <h1 id="page-title">Sign in</h1>
+  <p>Access your private notes.</p>
+  <% if (error) { %><p class="form-error" role="alert"><%= error %></p><% } %>
+  <form action="/login" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" value="<%= email %>" maxlength="254" autocomplete="username" required autofocus>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" maxlength="128" autocomplete="current-password" required>
+
+    <button type="submit">Sign in</button>
+  </form>
+  <p class="alternate">No account? <a href="/register">Create one</a>.</p>
+</section>
+<%- include('partials/foot') %>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title><%= title %> · Secure Notes</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="/">Secure Notes</a>
+      <% if (isAuthenticated) { %>
+        <form action="/logout" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="link-button" type="submit">Sign out</button>
+        </form>
+      <% } %>
+    </header>
+    <main id="main" class="container">
+      <% if (flash) { %>
+        <p class="flash flash-<%= flash.type %>" role="status"><%= flash.message %></p>
+      <% } %>
