@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Secure Notes Application">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Secure Notes App</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <script src="/public/js/app.js" defer></script>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-title">Secure Notes</h1>
+                <div class="nav-menu">
+                    <button id="publicNotesBtn" class="nav-btn">Public Notes</button>
+                    <button id="myNotesBtn" class="nav-btn" style="display:none;">My Notes</button>
+                    <button id="loginBtn" class="nav-btn">Login</button>
+                    <button id="registerBtn" class="nav-btn">Register</button>
+                    <button id="logoutBtn" class="nav-btn" style="display:none;">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container">
+            <!-- Auth Forms -->
+            <div id="authContainer" class="auth-container" style="display:none;">
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form" style="display:none;">
+                    <h2>Login</h2>
+                    <div class="form-group">
+                        <label for="loginUsername">Username</label>
+                        <input type="text" id="loginUsername" name="username" required 
+                               pattern="[a-zA-Z0-9]{3,50}" autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="password" required 
+                               autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <div class="error-message" id="loginError"></div>
+                </form>
+
+                <!-- Register Form -->
+                <form id="registerForm" class="auth-form" style="display:none;">
+                    <h2>Register</h2>
+                    <div class="form-group">
+                        <label for="registerUsername">Username</label>
+                        <input type="text" id="registerUsername" name="username" required 
+                               pattern="[a-zA-Z0-9]{3,50}" autocomplete="username"
+                               title="3-50 alphanumeric characters">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" name="email" required 
+                               autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" name="password" required 
+                               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                               title="Min 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char"
+                               autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required
+                               autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <div class="error-message" id="registerError"></div>
+                </form>
+            </div>
+
+            <!-- Notes Container -->
+            <div id="notesContainer" class="notes-container">
+                <!-- Note Form -->
+                <div id="noteFormContainer" class="note-form-container" style="display:none;">
+                    <form id="noteForm" class="note-form">
+                        <h2 id="noteFormTitle">Create Note</h2>
+                        <input type="hidden" id="noteId" name="noteId">
+                        <div class="form-group">
+                            <label for="noteTitle">Title</label>
+                            <input type="text" id="noteTitle" name="title" required maxlength="255">
+                        </div>
+                        <div class="form-group">
+                            <label for="noteContent">Content</label>
+                            <textarea id="noteContent" name="content" required rows="10" maxlength="50000"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="noteTags">Tags (comma separated)</label>
+                            <input type="text" id="noteTags" name="tags" placeholder="tag1, tag2">
+                        </div>
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" id="notePublic" name="is_public">
+                                Make this note public
+                            </label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Note</button>
+                            <button type="button" id="cancelNoteBtn" class="btn btn-secondary">Cancel</button>
+                        </div>
+                        <div class="error-message" id="noteError"></div>
+                    </form>
+                </div>
+
+                <!-- Notes List -->
+                <div id="notesListContainer">
+                    <div class="notes-header">
+                        <h2 id="notesTitle">Public Notes</h2>
+                        <button id="createNoteBtn" class="btn btn-primary" style="display:none;">Create Note</button>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search notes..." class="search-input">
+                        <select id="tagFilter" class="tag-filter">
+                            <option value="">All Tags</option>
+                        </select>
+                    </div>
+                    <div id="notesList" class="notes-list"></div>
+                    <div id="pagination" class="pagination"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading" style="display:none;">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- CSRF Token Storage -->
+    <meta name="csrf-token" content="">
+</body>
+</html>
