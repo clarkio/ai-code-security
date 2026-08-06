@@ -8,7 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.22.0",
     "mongoose": "^5.10.9",
     "dotenv": "^8.2.0",
     "helmet": "^4.4.1",
